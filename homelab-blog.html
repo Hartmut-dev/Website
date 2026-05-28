@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Lab Dev Blog | Hartmut Kirsch</title>
+    <link rel="icon" type="image/png" href="avatar.png">
+    <style>
+        /* Same CSS variables as your main site */
+        :root {
+            --bg-color: #0d1117;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --card-bg: #161b22;
+            --border: #30363d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .blog-container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .nav-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .blog-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .post-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .blog-content h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .log-entry {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .log-date {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blog-container">
+        <a href="index.html" class="nav-link">&larr; Back to Portfolio</a>
+
+        <div class="blog-header">
+            <h1>Dev Blog: Enterprise Home Lab</h1>
+            <span class="post-date">Project Status: Active</span>
+        </div>
+
+        <div class="blog-content">
+            <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
+            
+            <h2>Update Logs</h2>
+
+            <div class="log-entry">
+                <span class="log-date">May 18, 2026</span>
+                <p><strong>The Foundation & Hardware Sourcing:</strong> Currently sourcing parts for the bare-metal server build. The initial goal is to get the hardware assembled, install the base OS, and configure VMware as the primary hypervisor. Below is the current hardware inventory and procurement checklist.</p>
+                
+                <p><strong>Acquired Hardware:</strong></p>
+                <ul>
+                    <li><strong>Motherboard:</strong> Biostar B550MH (AM4 Socket)</li>
+                    <li><strong>GPU:</strong> NVIDIA RTX 3070 Ti</li>
+                    <li><strong>RAM:</strong> 16GB (2x 8GB) DDR4</li>
+                    <li><strong>PSU:</strong> 750W Gigabyte 80+ Gold</li>
+                    <li><strong>Cooler:</strong> Dual-fan CPU cooler</li>
+                    <li><strong>Case:</strong> Deepcool Compact ATX</li>
+                </ul>
+
+                <p><strong>Pending / To Acquire:</strong></p>
+                <ul>
+                    <li><strong>CPU:</strong> AMD Ryzen 5 3600 (or equivalent AM4 replacement)</li>
+                    <li><strong>Storage (OS/VMs):</strong> 1TB NVMe or SATA SSD</li>
+                    <li><strong>Storage (Media):</strong> 2TB+ HDD</li>
+                    <li><strong>Cooling:</strong> Standard case fans for intake/exhaust</li>
+                    <li><strong>Miscellaneous:</strong> Thermal paste, USB boot drive, Cat6 Ethernet cable</li>
+                </ul>
+            </div>
+            <div class="log-entry">
+                <span class="log-date">May 28, 2026</span>
+                <p><strong>Hardware Pivot & Lifecycle Extension:</strong> Repurposing an NVIDIA RTX 3070 Ti for the server build. The card began exhibiting instability under heavy 3D rendering loads in a primary workstation. However, by aggressively undervolting and power-limiting the card, it will remain perfectly stable for hardware media transcoding. This works because media encoding relies entirely on the dedicated NVENC silicon rather than raw CUDA compute power, extending the usable life of the hardware.</p>
+            </div>
+            <div class="log-entry">
+                <span class="log-date">May 28, 2026</span>
+                <p><strong>Architecture Decision - Proxmox VE:</strong> Evaluated bare-metal hypervisor options for the host OS. Selected Proxmox VE (built on Debian Linux) over VMware ESXi due to licensing changes and hardware compatibility constraints with consumer-grade motherboards. Proxmox will allow for an efficient resource footprint using lightweight Linux Containers (LXC) for services like Pi-hole, maximizing the utility of the lab's 16GB RAM budget while providing native support for PCIe pass-through of the RTX 3070 Ti.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

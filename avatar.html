@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Avatar Generator</title>
+    <style>
+        body {
+            /* Matches your hartmutk.dev dark background */
+            background-color: #0d1117; 
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-box {
+            /* Forces a perfect square area to help you frame your screenshot */
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .terminal-text {
+            /* Matches your hartmutk.dev accent blue */
+            color: #58a6ff; 
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 4.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .cursor {
+            /* Creates the solid terminal block */
+            display: inline-block;
+            width: 0.6em;
+            height: 1.1em;
+            background-color: #58a6ff;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="avatar-box">
+        <div class="terminal-text">&gt;hk.dev<span class="cursor"></span></div>
+    </div>
+
+</body>
+</html>

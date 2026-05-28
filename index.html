@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hartmut Kirsch | IT & Cyber Security</title>
+    <link rel="icon" type="image/png" href="avatar.png">
+    <style>
+        /* CSS styling */
+        :root {
+            --bg-color: #0d1117;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --card-bg: #161b22;
+            --border: #30363d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 800px;
+            padding: 4rem 2rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-text h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 0.2rem;
+            margin-top: 0;
+        }
+
+        .header-text h2 {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+       .header-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+            /* fix for off-centre logo */
+            object-position: 50% 45%; 
+            flex-shrink: 0;
+        }
+        /* Adjusts layout for mobile screens */
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+            }
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .section-title {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .card-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .links-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background-color: var(--card-bg);
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+        }
+
+        .contact-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Small fade-in animation */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="fade-in">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Hartmut Kirsch</h1>
+                <h2>IT Professional & Cyber Security Student | Perth, WA</h2>
+            </div>
+            <img src="avatar.png" alt="hk.dev logo" class="header-logo">
+        </div>
+        
+        <div class="links-container">
+            <a href="https://github.com/hartmut-dev" class="btn" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/hartmut-kirsch-45b156412/" class="btn" target="_blank">LinkedIn</a>
+            <a href="mailto:contact@hartmutk.dev" class="btn">Email Me</a>
+        </div>
+        <p class="contact-note">Currently seeking an IT or Cyber Security internship or entry-level role. Please feel free to reach out via email or LinkedIn to request my full resume.</p>
+    </header>
+
+    <main class="fade-in">
+        <section>
+            <h3 class="section-title">Current Projects</h3>
+            
+            <div class="card">
+                <h4 class="card-title">Personal IT Home Lab (In Progress)</h4>
+                <p>Architecting a multi-purpose personal home lab. Current plans include deploying a dedicated media server, implementing network-wide DNS sinkholing via Pi-hole, hosting dedicated game servers (managing port forwarding, firewalls, and resource allocation), and experimenting with a virtualised corporate network environment using VMware for hands-on system administration.</p>
+                <a href="homelab-blog.html" class="btn" style="margin-top: 1rem; display: inline-block;">Read Dev Blog &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h4 class="card-title">IT Automation Scripts</h4>
+                <p>Developing a suite of PowerShell and Python scripts to streamline daily Level 1 Helpdesk operations. Current scripts include a comprehensive system health diagnostic tool and automated file system manipulation. All code is documented and hosted on my GitHub.</p>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="section-title">About Me</h3>
+            <p>I am a highly motivated Bachelor of Computing (Cyber Security) student at Curtin University. I am passionate about system administration, network security, and translating complex technical problems into clear, practical solutions. I specialise in hands-on learning and continuously developing my skills to adapt to new technologies and enterprise environments.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> Hartmut Kirsch. All rights reserved.
+    </footer>
+
+    <script>
+        // Automatically update the copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
