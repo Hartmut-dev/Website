@@ -90,6 +90,59 @@
             margin-bottom: 0.5rem;
             display: block;
         }
+        
+        .roadmap-toggle-btn {
+            background-color: var(--card-bg);
+            color: var(--accent);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .roadmap-toggle-btn:hover {
+            background-color: var(--border);
+            border-color: var(--accent);
+        }
+
+        .roadmap-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        .roadmap-wrapper {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .roadmap-wrapper h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-wrapper h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .roadmap-wrapper ul {
+            padding-left: 1.2rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -101,7 +154,39 @@
             <h1>Dev Blog: Enterprise Home Lab</h1>
             <span class="post-date">Project Status: Active</span>
         </div>
+        
+        <button class="roadmap-toggle-btn" id="roadmapBtn">
+            <span>View Project Implementation Roadmap</span>
+            <span class="roadmap-arrow" id="roadmapArrow">▼</span>
+        </button>
+        
+        <div class="roadmap-wrapper" id="roadmapContent">
+            <h3>Phase 1: Physical Build & Hypervisor Deployment</h3>
+            <ul>
+                <li><strong>Hardware Assembly & POST:</strong> Benchmark components outside the case to ensure stability, particularly monitoring the repurposed RTX 3070 Ti.</li>
+                <li><strong>BIOS Configuration:</strong> Flash the Biostar B550MH to the latest stable firmware; enable AMD-V (SVM Mode) and IOMMU for essential virtualization mapping.</li>
+                <li><strong>Proxmox VE Installation:</strong> Deploy the bare-metal OS cleanly to the 1TB NVMe SSD and establish root environment variables.</li>
+            </ul>
 
+            <h3>Phase 2: Storage Architecture & Network Segmentation</h3>
+            <ul>
+                <li><strong>Storage Provisioning:</strong> Map the 1TB NVMe drive for performance-focused VMs and container roots; provision the 2TB 7200RPM HDD for data arrays, automated snapshots, and image ISO storage layers.</li>
+                <li><strong>Virtual Networking:</strong> Establish stable default Linux Bridges (`vmbr0`) and map out future isolated VLAN topologies to isolate laboratory tests from household internet traffic.</li>
+            </ul>
+
+            <h3>Phase 3: Core Infrastructure & Identity Management</h3>
+            <ul>
+                <li><strong>Lightweight Network Services:</strong> Spin up responsive Linux Containers (LXC) to host Pi-hole or local DNS/Ad-blocking setups, maximizing efficiency on the tight 16GB RAM overhead.</li>
+                <li><strong>Identity Sandbox (Active Directory):</strong> Spin up a dedicated Windows Server VM environment acting as a primary Domain Controller to master group policy mechanics, organizational layouts, and secure access management routines.</li>
+            </ul>
+
+            <h3>Phase 4: Hardware Pass-Through & Security Hardening</h3>
+            <ul>
+                <li><strong>GPU Isolation (NVENC):</strong> Configure system boot flags to isolate hardware devices via IOMMU tables, passing the GPU structure straight to rendering workloads.</li>
+                <li><strong>Security Monitoring & Access Control:</strong> Strip back default root credential exposures over SSH in preference for unique hardware security keys, deploying local endpoint analytics to parse log events.</li>
+            </ul>
+        </div>
+        
         <div class="blog-content">
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             
