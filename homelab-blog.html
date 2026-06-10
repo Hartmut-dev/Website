@@ -228,6 +228,23 @@
             </div>
         </div>
     </div>
+    <script>
+        const roadmapBtn = document.getElementById('roadmapBtn');
+        const roadmapContent = document.getElementById('roadmapContent');
+        const roadmapArrow = document.getElementById('roadmapArrow');
 
+        roadmapBtn.addEventListener('click', () => {
+            const isVisible = roadmapContent.style.display === 'block';
+            
+            if (isVisible) {
+                roadmapContent.style.display = 'none';
+                roadmapArrow.textContent = '▼';
+                roadmapArrow.style.transform = 'rotate(0deg)';
+            } else {
+                roadmapContent.style.display = 'block';
+                roadmapArrow.textContent = '▲';
+            }
+        });
+    </script>
 </body>
 </html>
