@@ -192,6 +192,18 @@
             
             <h2>Update Logs</h2>
             <div class="log-entry">
+                <span class="log-date">October 13, 2026</span>
+                <p><strong>Architecture Pivot & Core Infrastructure Online:</strong> After an extended hiatus and some necessary hardware recalculations, the homelab is officially online. The original plan to use Proxmox was scrapped in favor of a bare-metal <strong>Ubuntu Server</strong> installation. This shift accommodates a dual-hypervisor approach, utilizing Docker for our AI and media stack while reserving KVM strictly for network-isolated CTF environments.</p>
+                <p><strong>Hardware Swap:</strong> The failing RTX 3070 Ti has been retired. In a stroke of luck during parts sourcing, I acquired what was labeled as a GTX 1070, but hardware interrogation via <code>lspci</code> confirmed it is actually a <strong>GTX 1080 (GP104)</strong>. The proprietary NVIDIA server drivers and the NVIDIA Container Toolkit are fully deployed, allowing Docker containers to seamlessly share the GPU for NVENC transcoding and AI inference.</p>
+                <p><strong>Documentation Initiative:</strong> I have begun compiling a comprehensive, modular documentation repository for this project using Obsidian. This will track all configurations, including our custom Python-based Human-in-the-Loop (HITL) security agent.</p>
+                
+                <p><strong>Latest Documentation Release:</strong></p>
+                <ul>
+                    <li><a href="docs/01_Hardware_and_Storage.md" class="nav-link" style="margin-bottom: 0.5rem; font-size: 0.95rem;">📄 [Download] 01 - Hardware and Storage Architecture (.md)</a></li>
+                    <li><a href="docs/02_Host_OS_and_Virtualization.md" class="nav-link" style="margin-bottom: 0.5rem; font-size: 0.95rem;">📄 [Download] 02 - Host OS and Virtualization Setup (.md)</a></li>
+                </ul>
+            </div>
+            <div class="log-entry">
                 <span class="log-date">June 10, 2026</span>
                 <p><strong>Hardware Procurement Complete & Procurement Checklist Cleared:</strong> Finalized the hardware acquisition phase today with the purchase of the remaining core components. Upgraded the CPU choice from a Ryzen 5 3600 to a Ryzen 5 5600, providing a stronger Zen 3 architecture foundation for multi-threaded virtualization tasks. Also secured a 1TB NVMe SSD for high-speed OS/VM provisioning and a 2TB 7200RPM SATA HDD for high-capacity media and backup storage. Scavenged a functional spare chassis fan to complete the cooling configuration. The build is officially ready for physical assembly.</p>
             </div>
