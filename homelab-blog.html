@@ -174,7 +174,8 @@
                 <li><strong>Wake-on-LAN:</strong> The always-on server wakes workstations on demand, reachable remotely through the Tailscale mesh.</li>
                 <li><strong>Monitoring & Alerting:</strong> Uptime Kuma, followed by Prometheus and Grafana with SNMP polling.</li>
                 <li><strong>LLM Triage Agent:</strong> Deterministic scripts collect health data; a local model on the GTX 1080 summarises and escalates. No privileged access, and hardened against prompt injection from log content.</li>
-                <li><strong>Web Hardening & Redesign:</strong> Security headers and TLS review for this site, followed by a visual overhaul.</li>
+                <li><strong>Threat-Intel Scout & Librarian:</strong> Two more local LLM roles, each compartmentalised: one filters security feeds for vulnerabilities affecting this stack (internet only, no system access), one answers questions about this documentation (read-only).</li>
+                <li><strong>Web Hardening:</strong> Security headers and TLS review for this site.</li>
             </ul>
 
             <h3>After the 32GB RAM Upgrade</h3>

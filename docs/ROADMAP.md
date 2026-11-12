@@ -14,7 +14,9 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Wake-on-LAN:** homelab wakes the desktop over LAN, reachable through Tailscale
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
 - [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
-- [ ] **Website hardening:** security headers, TLS check, then a visual overhaul
+- [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
+- [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only
+- [ ] **Website hardening:** security headers, TLS check
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
 ## After the RAM upgrade to 32 GB (end of Nov 2026)
@@ -33,8 +35,13 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **RTX 3070 Ti repair:** research and troubleshoot the instability under 3D load (driver vs VRAM vs power vs thermals), decide if it's fixable
 
 ## Later / ideas
+- [ ] **(Maybe) CCNA tutor:** local LLM quizzes from study notes; a script generates and checks subnetting maths
 - [x] **Secrets management:** all .env files replaced with sops + age encrypted secrets (free; Proton Pass CLI needed a higher plan)
 - [ ] Centralised logging or SIEM (Wazuh or Loki)
 - [ ] Hand-built WireGuard tunnel
 - [ ] Internal DNS zone and private CA for TLS
 - [ ] Off-site backup copy, auditd, disable UPnP on both routers
+
+## Fun / miscellaneous
+- [ ] **Website aesthetic overhaul:** visual redesign once hardening is done
+- [ ] **Minecraft helper bot:** `!ask` in game chat, answered by the local LLM from the modpack's wikis
