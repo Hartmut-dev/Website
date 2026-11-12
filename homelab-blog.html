@@ -161,29 +161,29 @@
         </button>
         
         <div class="roadmap-wrapper" id="roadmapContent">
-            <h3>Phase 1: Physical Build & Hypervisor Deployment</h3>
+            <h3>Now: Documentation & Daily Operations</h3>
             <ul>
-                <li><strong>Hardware Assembly & POST:</strong> Benchmark components outside the case to ensure stability, particularly monitoring the repurposed RTX 3070 Ti.</li>
-                <li><strong>BIOS Configuration:</strong> Flash the Biostar B550MH to the latest stable firmware; enable AMD-V (SVM Mode) and IOMMU for essential virtualization mapping.</li>
-                <li><strong>Proxmox VE Installation:</strong> Deploy the bare-metal OS cleanly to the 1TB NVMe SSD and establish root environment variables.</li>
+                <li><strong>Docs-as-Code Pipeline:</strong> A repository-scoped deploy key on the server lets documentation be edited and pushed straight from the lab, with secret scanning before every commit.</li>
+                <li><strong>Folder Consolidation:</strong> Retire migration leftovers and stray backups, then bring host scripts and configs under version control.</li>
+                <li><strong>Minecraft Resource Management:</strong> RCON-driven idle shutdown so the game server releases its memory when nobody is online.</li>
             </ul>
 
-            <h3>Phase 2: Storage Architecture & Network Segmentation</h3>
+            <h3>Next: Core Network Services</h3>
             <ul>
-                <li><strong>Storage Provisioning:</strong> Map the 1TB NVMe drive for performance-focused VMs and container roots; provision the 2TB 7200RPM HDD for data arrays, automated snapshots, and image ISO storage layers.</li>
-                <li><strong>Virtual Networking:</strong> Establish stable default Linux Bridges (`vmbr0`) and map out future isolated VLAN topologies to isolate laboratory tests from household internet traffic.</li>
+                <li><strong>Pi-hole + Unbound:</strong> Self-hosted recursive DNS with ad-blocking, rolled out to the tailnet first and the household second.</li>
+                <li><strong>Wake-on-LAN:</strong> The always-on server wakes workstations on demand, reachable remotely through the Tailscale mesh.</li>
+                <li><strong>Monitoring & Alerting:</strong> Uptime Kuma, followed by Prometheus and Grafana with SNMP polling.</li>
+                <li><strong>LLM Triage Agent:</strong> Deterministic scripts collect health data; a local model on the GTX 1080 summarises and escalates. No privileged access, and hardened against prompt injection from log content.</li>
+                <li><strong>Web Hardening & Redesign:</strong> Security headers and TLS review for this site, followed by a visual overhaul.</li>
             </ul>
 
-            <h3>Phase 3: Core Infrastructure & Identity Management</h3>
+            <h3>After the 32GB RAM Upgrade</h3>
             <ul>
-                <li><strong>Lightweight Network Services:</strong> Spin up responsive Linux Containers (LXC) to host Pi-hole or local DNS/Ad-blocking setups, maximizing efficiency on the tight 16GB RAM overhead.</li>
-                <li><strong>Identity Sandbox (Active Directory):</strong> Spin up a dedicated Windows Server VM environment acting as a primary Domain Controller to master group policy mechanics, organizational layouts, and secure access management routines.</li>
-            </ul>
-
-            <h3>Phase 4: Hardware Pass-Through & Security Hardening</h3>
-            <ul>
-                <li><strong>GPU Isolation (NVENC):</strong> Configure system boot flags to isolate hardware devices via IOMMU tables, passing the GPU structure straight to rendering workloads.</li>
-                <li><strong>Security Monitoring & Access Control:</strong> Strip back default root credential exposures over SSH in preference for unique hardware security keys, deploying local endpoint analytics to parse log events.</li>
+                <li><strong>Network Segmentation:</strong> Managed switch and OPNsense/pfSense firewall with VLANs for trusted, lab, IoT, guest and CTF traffic.</li>
+                <li><strong>Physical Network Lab:</strong> Secondhand enterprise switches for hands-on VLAN trunking, spanning tree, link aggregation and inter-VLAN routing, connected to the virtual lab for hybrid topologies.</li>
+                <li><strong>Routing Labs:</strong> OSPF and BGP topologies in Containerlab as CCNA preparation.</li>
+                <li><strong>Self-Hosted AI Workspace:</strong> Trial Odysseus alongside Open WebUI, with mail and calendar connectors disabled.</li>
+                <li><strong>Enterprise Network Lab:</strong> A dedicated hypervisor environment (virtual routers, switches and firewalls) for practising enterprise topologies such as VLAN trunking, routing protocols and site-to-site VPNs.</li>
             </ul>
         </div>
         
@@ -191,6 +191,19 @@
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             
             <h2>Update Logs</h2>
+            <div class="log-entry">
+                <span class="log-date">November 12, 2026</span>
+                <p><strong>Game Server Deployment & Zero-Exposure Networking:</strong> The first production workload is live: a modded Minecraft server (Create Ultimate Selection on NeoForge 1.21.1) shared with a friend. The server was migrated from a plain Docker image to <strong>Crafty Controller</strong>, which provides a web panel, role-based accounts, scheduled backups and twice-daily restarts with in-game warnings. Because the lab sits behind <strong>double NAT</strong> (NBN modem into a second home router over powerline), traditional port forwarding was never a clean option, and opening ports would have exposed the host directly to the internet anyway.</p>
+                <p><strong>Tunnels Instead of Open Ports:</strong> Public players connect through a <strong>playit.gg</strong> agent container, which holds an outbound tunnel to playit's edge and relays game traffic back to the server on <code>127.0.0.1</code>. Nothing on the router is forwarded. Administrative access uses <strong>Tailscale</strong>, a WireGuard-based mesh VPN: every Docker service (Crafty panel, game port, Open WebUI) is bound to localhost only and then published to my private tailnet with <code>tailscale serve</code>. The LAN itself can no longer reach those services, which was verified from another machine. The result is a single, deliberate internet entry point for the game and an encrypted, identity-based path for everything else.</p>
+                <p><strong>Host Hardening:</strong> SSH moved to key-only authentication with root login disabled, a single allowed user and limited auth attempts. <strong>ufw</strong> now defaults to deny inbound, allowing only the tailnet, Tailscale's UDP port and SSH from the local subnet, with <strong>fail2ban</strong> watching SSH. Kernel sysctl hardening was applied and unused network protocols (DCCP, SCTP, RDS, TIPC) were blacklisted. A <strong>Lynis</strong> audit moved the hardening index from 66 to 71 with zero warnings.</p>
+                <p><strong>Backup Strategy:</strong> Crafty takes world backups every six hours, and an hourly cron job copies the newest archive from the NVMe to the 2TB HDD with a rolling retention policy, so a single drive failure no longer means losing the world.</p>
+                <p><strong>CTF Lab Phase 1:</strong> Built an isolated libvirt network (<code>10.66.0.0/24</code>, no forwarding) with separate storage pools for VM disks and checksum-verified base images. A self-destructing Alpine test VM attempts to reach the host, LAN, router, tailnet and internet; all 19 checks were blocked. Attack VMs will move onto the server after the RAM upgrade.</p>
+                <p><strong>Shifting Focus to Networking:</strong> Going forward, I am steering this lab toward networking skills. Upcoming work covers self-hosted DNS with Pi-hole and Unbound, Wake-on-LAN, monitoring with Prometheus and Grafana, and ultimately a full VLAN segmentation of the home network behind an OPNsense firewall. The updated plan is in the roadmap above and in the documentation repository.</p>
+                <p><strong>Latest Documentation Release:</strong></p>
+                <ul>
+                    <li><a href="docs/ROADMAP.md" class="nav-link" style="margin-bottom: 0.5rem; font-size: 0.95rem;">📄 [Download] Homelab Roadmap (.md)</a></li>
+                </ul>
+            </div>
             <div class="log-entry">
                 <span class="log-date">October 13, 2026</span>
                 <p><strong>Architecture Pivot & Core Infrastructure Online:</strong> After an extended hiatus and some necessary hardware recalculations, the homelab is officially online. The original plan to use Proxmox was scrapped in favor of a bare-metal <strong>Ubuntu Server</strong> installation. This shift accommodates a dual-hypervisor approach, utilizing Docker for our AI and media stack while reserving KVM strictly for network-isolated CTF environments.</p>
