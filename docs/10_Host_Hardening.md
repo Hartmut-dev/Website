@@ -92,6 +92,59 @@ install tipc /bin/false
 
 ---
 
+##  Secret Scanning (Documentation Repo)
+These docs are published from the server to a public GitHub repo, so every commit is scanned for secrets before it is allowed.
+
+*   **Tool:** gitleaks 8.30.1, installed to `~/.local/bin` (release checksum verified, no root needed).
+*   **Built-in rules:** API keys, tokens, passwords, private keys.
+*   **Custom rules:** internal hostnames, private IP ranges, tunnel addresses, server IDs, and personal email addresses.
+*   **Custom rules live outside the repo** (`~/.config/gitleaks/`). A public rules file listing private details would leak exactly what it protects.
+
+**1. Install (verified download):**
+```bash
+curl -sLO https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+curl -sLO https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_checksums.txt
+grep linux_x64.tar.gz gitleaks_8.30.1_checksums.txt | sha256sum -c -
+tar -xzf gitleaks_8.30.1_linux_x64.tar.gz gitleaks
+install -m 755 gitleaks ~/.local/bin/gitleaks
+```
+
+**2. Custom Rule Example (`~/.config/gitleaks/homelab.toml`):**
+```toml
+[extend]
+useDefault = true          # keep all built-in rules
+
+[[rules]]
+id = "lan-ip"
+description = "Home LAN address"
+regex = '''\b192\.168\.\d{1,3}\.\d{1,3}\b'''
+```
+
+**3. Pre-commit Hook (`.git/hooks/pre-commit`):**
+```sh
+#!/bin/sh
+GL="$HOME/.local/bin/gitleaks"
+CFG="$HOME/.config/gitleaks/homelab.toml"
+if [ ! -x "$GL" ] || [ ! -f "$CFG" ]; then
+  echo "pre-commit: gitleaks or its config is missing; refusing to commit." >&2
+  exit 1               # fail closed, never skip the scan silently
+fi
+exec "$GL" git --pre-commit --staged --redact --no-banner --config "$CFG" .
+```
+
+**4. Verification:**
+```bash
+# Full history scan
+gitleaks git --config ~/.config/gitleaks/homelab.toml .
+# Planted test: a fake internal hostname must block the commit
+echo "https://myhost.tail<hex-id>.ts.net" > leaktest.md   # real hex ID used in the actual test && git add leaktest.md && git commit -m test
+```
+(The test commit was blocked with `leaks found: 1`, and the full history scanned clean. The hook also caught the fake hostname in the first draft of this very page.)
+
+**Known gap:** Edits made directly on github.com bypass the local hook.
+
+---
+
 ##  Auditing with Lynis
 ```bash
 sudo lynis audit system
