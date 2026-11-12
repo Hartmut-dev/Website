@@ -10,6 +10,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 - [[03_Media_Server_Jellyfin]] - Docker Compose, NVENC hardware transcoding, storage mapping.
 - [[04_Local_LLM_Stack]] - Ollama, Open WebUI, and `qwen3:8b` configurations. 
 - [[07_Minecraft_Game_Server]] - Crafty Controller, modpack management, schedules, and memory limits.
+- [[12_File_Sharing_qBittorrent_and_VPN]] - qBittorrent behind a gluetun VPN kill switch, leak tests, and a command cheat sheet.
 ##  Networking & Remote Access 
 - [[08_Network_Topology]] - Double NAT layout, addressing, and planned VLAN segmentation.
 - [[09_Remote_Access_Tailscale_and_Tunnels]] - Tailscale mesh VPN, `tailscale serve`, and the playit.gg tunnel.

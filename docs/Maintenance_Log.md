@@ -4,7 +4,8 @@ Running notes on updates, fixes, and changes. Newest first.
 ---
 
 ### 2026-11-12
-*   **Cleanup:** Host scripts moved to `~/homelab/scripts/`, logs to `~/homelab/logs/`, old compose files into per-app `archive/` folders. ~11GB of migration and update leftovers moved (checksum-verified) to a quarantine folder on the HDD, to be purged after two weeks.
+*   **New service:** qBittorrent behind gluetun (PureVPN, OpenVPN/TCP). Kill switch tested. See [[12_File_Sharing_qBittorrent_and_VPN]].
+*   **Cleanup:** Mod undo backups deleted after a friend tested the mods. Host scripts moved to `~/homelab/scripts/`, logs to `~/homelab/logs/`, old compose files into per-app `archive/` folders. ~11GB of migration and update leftovers moved (checksum-verified) to a quarantine folder on the HDD, to be purged after two weeks.
 *   **Security:** gitleaks pre-commit hook added to the docs repo. See [[10_Host_Hardening]].
 *   **Fixed:** Jellyfin and Ollama failed to start after reboot (`failed to add device rules`). Root cause: `bpf_jit_harden = 2` breaks the NVIDIA toolkit's legacy GPU mode. Switched both to CDI mode; hardening unchanged. See [[03_Media_Server_Jellyfin]].
 *   **Removed:** Retired the experimental HITL security agent script (approval step could be bypassed).

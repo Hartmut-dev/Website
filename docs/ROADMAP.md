@@ -15,7 +15,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
 - [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
 - [ ] **Website hardening:** security headers, TLS check, then a visual overhaul
-- [ ] **File sharing with friends:** Syncthing or a Tailscale share (simpler than torrents behind double NAT)
+- [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
 ## After the RAM upgrade to 32 GB (end of Nov 2026)
 - [ ] **Physical network gear:** secondhand managed switches (Cisco Catalyst 2960/3560 class), console access, VLANs/trunks/STP/EtherChannel on real hardware, a 2-4 port NIC for the homelab, hybrid physical + virtual labs
