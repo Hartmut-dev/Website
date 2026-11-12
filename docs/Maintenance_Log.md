@@ -4,6 +4,8 @@ Running notes on updates, fixes, and changes. Newest first.
 ---
 
 ### 2026-11-12
+*   **Cleanup:** Host scripts moved to `~/homelab/scripts/`, logs to `~/homelab/logs/`, old compose files into per-app `archive/` folders. ~11GB of migration and update leftovers moved (checksum-verified) to a quarantine folder on the HDD, to be purged after two weeks.
+*   **Security:** gitleaks pre-commit hook added to the docs repo. See [[10_Host_Hardening]].
 *   **Fixed:** Jellyfin and Ollama failed to start after reboot (`failed to add device rules`). Root cause: `bpf_jit_harden = 2` breaks the NVIDIA toolkit's legacy GPU mode. Switched both to CDI mode; hardening unchanged. See [[03_Media_Server_Jellyfin]].
 *   **Removed:** Retired the experimental HITL security agent script (approval step could be bypassed).
 *   **Docs:** Added pages 03, 04, 07-11, roadmap, and this log. Docs now published from the homelab via a repo-scoped deploy key.

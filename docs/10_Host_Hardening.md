@@ -1,7 +1,7 @@
 ## Host Hardening Overview
 The host was hardened in two rounds, each written as a re-runnable shell script. Every change is a separate drop-in file, so any single change can be undone by deleting that file.
 
-*   **Scripts:** `~/homelab/harden-root.sh` and `~/homelab/harden-root-2.sh`
+*   **Scripts:** `~/homelab/scripts/harden-root.sh` and `~/homelab/scripts/harden-root-2.sh`
 *   **Result:** Lynis hardening index **66 -> 71**, zero warnings.
 
 ---

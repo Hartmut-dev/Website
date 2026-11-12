@@ -15,11 +15,11 @@ Backups follow a simple rule: **one dead disk must never take out both the data 
 ---
 
 ##  Layer 2: Copy to the Storage Disk
-**Script:** `~/homelab/storage-backup.sh`, run hourly from cron:
+**Script:** `~/homelab/scripts/storage-backup.sh`, run hourly from cron:
 ```bash
 crontab -e
 # Added:
-20 * * * * ~/homelab/storage-backup.sh
+20 * * * * ~/homelab/scripts/storage-backup.sh
 ```
 
 **What it does:**
