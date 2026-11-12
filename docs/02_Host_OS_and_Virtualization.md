@@ -59,3 +59,10 @@ Docker cannot see or use the physical GPU by default. The NVIDIA Container Toolk
  docker run --rm --gpus all ubuntu nvidia-smi
  ```
  (If successful, this will print the same NVIDIA status table from inside an isolated container).
+
+ **5. Update (Nov 2026) - CDI Mode:** The host's kernel hardening (`bpf_jit_harden = 2`) breaks the legacy `--gpus` method above. GPU containers now use CDI mode instead:
+ ```bash
+ sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+ docker run --rm --device nvidia.com/gpu=all ubuntu nvidia-smi
+ ```
+ (Full write-up in [[03_Media_Server_Jellyfin]].)
