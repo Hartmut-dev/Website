@@ -13,7 +13,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Pi-hole + Unbound:** own recursive DNS, tailnet first, then the whole house
 - [ ] **Wake-on-LAN:** homelab wakes the desktop over LAN, reachable through Tailscale
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
-- [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs
+- [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
 - [ ] **Website hardening:** security headers, TLS check, then a visual overhaul
 - [ ] **File sharing with friends:** Syncthing or a Tailscale share (simpler than torrents behind double NAT)
 
