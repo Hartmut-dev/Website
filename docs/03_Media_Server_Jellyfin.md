@@ -37,18 +37,13 @@ services:
       - ./cache:/cache
       - /mnt/storage/media:/media
     restart: 'unless-stopped'
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    devices:
+      - nvidia.com/gpu=all   # CDI mode (legacy --gpus breaks with net.core.bpf_jit_harden=2)
 ```
 
 **Key Settings:**
 *   **`network_mode: host`** - Lets Jellyfin use the host's network stack directly, which makes local device discovery (DLNA / client auto-detect) work without extra port mappings.
-*   **`deploy.resources.reservations.devices`** - Requests the GPU through the NVIDIA Container Toolkit (see [[02_Host_OS_and_Virtualization]]).
+*   **`devices: nvidia.com/gpu=all`** - Requests the GPU as a CDI device through the NVIDIA Container Toolkit (see Known Issues & Fixes below).
 *   **`restart: unless-stopped`** - Brings the server back automatically after a reboot.
 
 ---
@@ -80,5 +75,15 @@ nvidia-smi
 
 ---
 
-##  Known Issues
-*   **GPU containers failing to start (Nov 2026):** After a reboot, Jellyfin and Ollama exited with an `nvidia-container-cli: mount error: failed to add device rules` error. Under investigation; possibly linked to the kernel BPF hardening applied on 2026-10-30.
+##  Known Issues & Fixes
+*   **GPU containers failing to start (Nov 2026) - RESOLVED:** After the first reboot following host hardening, Jellyfin and Ollama exited with `nvidia-container-cli: mount error: failed to add device rules`.
+    *   **Root cause:** The kernel hardening setting `net.core.bpf_jit_harden = 2` breaks the NVIDIA Container Toolkit's *legacy* mode, which builds an eBPF cgroup device filter for each GPU container. Confirmed by testing: the container started with the setting at `0` and failed at `2`.
+    *   **Fix:** Switched to **CDI (Container Device Interface)** mode instead of weakening the hardening. The toolkit generates a device spec and Docker requests the GPU as a named device:
+```bash
+# Generate the CDI spec (auto-refreshed after driver updates by nvidia-cdi-refresh.path)
+sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+nvidia-ctk cdi list
+# Test
+docker run --rm --device nvidia.com/gpu=all ubuntu nvidia-smi -L
+```
+    *   In Compose, the `deploy.resources.reservations.devices` block was replaced with `devices: - nvidia.com/gpu=all`.

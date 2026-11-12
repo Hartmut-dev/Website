@@ -33,13 +33,8 @@ services:
       - "127.0.0.1:11434:11434"
     volumes:
       - ./ollama:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    devices:
+      - nvidia.com/gpu=all   # CDI mode (legacy --gpus breaks with net.core.bpf_jit_harden=2)
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -58,7 +53,7 @@ services:
 **Key Settings:**
 *   **`127.0.0.1:` port bindings** - Neither service listens on the LAN. Open WebUI is reached remotely through Tailscale (`tailscale serve`), and the Ollama API is only available to the host itself.
 *   **`OLLAMA_BASE_URL=http://ollama:11434`** - Open WebUI reaches Ollama by container name over the internal Docker network.
-*   **GPU reservation** - Same NVIDIA Container Toolkit method as Jellyfin (see [[02_Host_OS_and_Virtualization]]).
+*   **`devices: nvidia.com/gpu=all`** - GPU passed in CDI mode, same as Jellyfin (see [[03_Media_Server_Jellyfin]]).
 
 ---
 
@@ -94,5 +89,5 @@ nvidia-smi
 
 ---
 
-##  Known Issues
-*   **Ollama container failing to start (Nov 2026):** Same `nvidia-container-cli` device-rules error as Jellyfin. See [[03_Media_Server_Jellyfin]].
+##  Known Issues & Fixes
+*   **Ollama container failing to start (Nov 2026) - RESOLVED:** Caused by `bpf_jit_harden = 2` breaking the toolkit's legacy GPU mode. Fixed by switching to CDI mode. Full write-up in [[03_Media_Server_Jellyfin]].
