@@ -92,6 +92,68 @@ install tipc /bin/false
 
 ---
 
+##  Secrets Management (sops + age)
+Service secrets (VPN credentials, tunnel key, API keys) used to sit in plain-text `.env` files, and the nightly backup copied them to the HDD every day with 30-day retention. They are now **encrypted at rest** and only decrypted in memory when a container is created.
+
+*   **age** - modern file encryption. One key pair: the public key locks, the private key unlocks.
+*   **sops** - encrypts the *values* in a secrets file with that key, and runs a command with them decrypted into its environment (`sops exec-env`).
+*   **Key storage:** private key in `~/.config/sops/age/keys.txt` (mode 600), with an offline copy in a password manager. It is deliberately **not** included in backups, so a stolen backup is useless on its own.
+*   **Why not a cloud secrets manager?** Proton Pass CLI was evaluated first (scoped, read-only access tokens), but it requires a higher plan tier. sops + age is free, offline, and an industry-standard pattern.
+
+**1. Install (verified):**
+```bash
+sudo apt install -y age                       # signed Ubuntu repo
+curl -sLO https://github.com/getsops/sops/releases/download/v3.13.3/sops-v3.13.3.linux.amd64
+curl -sLO https://github.com/getsops/sops/releases/download/v3.13.3/sops-v3.13.3.checksums.txt
+grep ' sops-v3.13.3.linux.amd64$' sops-v3.13.3.checksums.txt | sha256sum -c -
+install -m 755 sops-v3.13.3.linux.amd64 ~/.local/bin/sops
+```
+
+**2. Generate the Key (never printed to screen or logs):**
+```bash
+mkdir -p ~/.config/sops/age && chmod 700 ~/.config/sops ~/.config/sops/age
+(umask 077; age-keygen -o ~/.config/sops/age/keys.txt)
+```
+
+**3. Encryption Rule (`~/.sops.yaml`, public key only):**
+```yaml
+creation_rules:
+  - path_regex: secrets\.enc\.env$
+    age: <age-public-key>
+```
+
+**4. Compose Refuses to Start Without Secrets:**
+```yaml
+environment:
+  OPENVPN_PASSWORD: ${OPENVPN_PASSWORD:?run via compose-secrets}
+```
+
+**5. Helper Script (`~/homelab/scripts/compose-secrets`):**
+```bash
+#!/bin/bash
+set -euo pipefail
+dir=$1; shift
+cd "$dir"
+cmd="docker compose $(printf '%q ' "$@")"     # quote every argument safely
+exec "$HOME/.local/bin/sops" exec-env secrets.enc.env "$cmd"
+```
+```bash
+compose-secrets ~/docker/qbittorrent up -d     # start / recreate
+sops ~/docker/qbittorrent/secrets.enc.env      # edit (decrypts in an editor, re-encrypts on save)
+```
+
+**6. Migration & Verification:**
+*   Each secret was checked after encryption by comparing its **length** or a **hash prefix** against the running container, never the value itself.
+*   Containers were recreated through the helper and re-tested (VPN IP, kill switch, tunnel connected).
+*   All plain-text copies were removed with `shred`: the live `.env` files, old `.env.bak` copies, and **15 daily config snapshots** on the backup disk. A final search for one of the keys across the home folder and backup disk found no plain-text copies.
+
+**Limits (honest threat model):**
+*   Protects files, backups, and accidental leaks, **not** a fully compromised host: root can still read a running container's environment (`docker inspect`).
+*   `shred` on a journaling filesystem or SSD is best-effort. For truly sensitive keys, the complete fix is **rotation** (issuing new keys).
+*   Lose the age key and the secrets are unrecoverable, hence the offline backup.
+
+---
+
 ##  Secret Scanning (Documentation Repo)
 These docs are published from the server to a public GitHub repo, so every commit is scanned for secrets before it is allowed.
 

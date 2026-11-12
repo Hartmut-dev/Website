@@ -38,8 +38,9 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - ./gluetun:/gluetun         # keeps the updated VPN server list
-    env_file: .env                 # VPN credentials (chmod 600, never committed)
     environment:
+      OPENVPN_USER: ${OPENVPN_USER:?run via compose-secrets}      # decrypted from secrets.enc.env
+      OPENVPN_PASSWORD: ${OPENVPN_PASSWORD:?run via compose-secrets}
       VPN_SERVICE_PROVIDER: purevpn
       VPN_TYPE: openvpn
       OPENVPN_PROTOCOL: tcp
@@ -75,11 +76,11 @@ services:
           memory: 1G
 ```
 
-**`.env` format** (values in single quotes, see Troubleshooting):
+**Secrets:** stored in `secrets.enc.env`, encrypted with sops + age, and decrypted in memory at startup (see [[10_Host_Hardening]]):
+```bash
+~/homelab/scripts/compose-secrets ~/docker/qbittorrent up -d
 ```
-OPENVPN_USER='<vpn-username>'
-OPENVPN_PASSWORD='<vpn-password>'
-```
+(Originally a plain `.env` with values in single quotes; see Troubleshooting.)
 
 ---
 
@@ -155,7 +156,7 @@ docker inspect gluetun --format '{{range .Config.Env}}{{println .}}{{end}}' \
 ```bash
 cd ~/docker/qbittorrent
 docker ps --filter name=gluetun --filter name=qbittorrent   # gluetun should be (healthy)
-docker compose up -d                                         # start
+~/homelab/scripts/compose-secrets ~/docker/qbittorrent up -d   # start / recreate (decrypts secrets)
 docker compose stop                                          # stop torrenting
 docker compose restart                                       # restart both
 docker logs --tail 20 gluetun                                # VPN status
@@ -181,10 +182,10 @@ df -h /mnt/storage                               # free space
 # Refresh the VPN server list (when connections start failing)
 docker compose stop
 docker run --rm -v ~/docker/qbittorrent/gluetun:/gluetun qmcgaw/gluetun:v3 update -enduser -providers purevpn
-docker compose up -d
+~/homelab/scripts/compose-secrets ~/docker/qbittorrent up -d
 
 # Update images
-docker compose pull && docker compose up -d
+docker compose pull && ~/homelab/scripts/compose-secrets ~/docker/qbittorrent up -d
 ```
 
 ---

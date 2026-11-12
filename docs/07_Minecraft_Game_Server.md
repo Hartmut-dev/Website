@@ -59,7 +59,7 @@ services:
 *   **`127.0.0.1:` port bindings** - Neither the panel nor the game port is reachable from the LAN directly. Access goes through Tailscale or the playit tunnel only.
 *   **`memory: 11G` limit** - Caps the container so a runaway server can't starve the rest of the host.
 *   **`TZ: Australia/Perth`** - Makes Crafty's schedules run on local time.
-*   **Secrets** (tunnel key, API keys, RCON password) live in a `.env` file that is never committed.
+*   **Secrets** (tunnel key, API keys, RCON password) are stored encrypted with sops + age and decrypted only in memory at startup. See [[10_Host_Hardening]].
 
 ---
 

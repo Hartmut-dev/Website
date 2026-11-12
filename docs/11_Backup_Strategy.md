@@ -25,7 +25,7 @@ crontab -e
 **What it does:**
 1.  **Safety check:** exits if `/mnt/storage` isn't mounted, so it never fills the root disk by mistake.
 2.  **World copy:** copies the newest Crafty zip, skipping any file modified in the last 10 minutes (Crafty may still be writing it).
-3.  **Config snapshot (daily):** compose files, the `.env` secrets, and Crafty's database and settings, as a `.tar.gz`.
+3.  **Config snapshot (daily):** compose files, the **sops-encrypted** secrets files, and Crafty's database and settings, as a `.tar.gz`. The decryption key is deliberately *not* in the backups; it is stored separately in a password manager.
 4.  **Independent retention:** prunes on its own schedule, so a wiped Crafty folder doesn't wipe the copies too.
 
 **Key Snippets:**

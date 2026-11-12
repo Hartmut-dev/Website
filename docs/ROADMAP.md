@@ -33,7 +33,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **RTX 3070 Ti repair:** research and troubleshoot the instability under 3D load (driver vs VRAM vs power vs thermals), decide if it's fixable
 
 ## Later / ideas
-- [ ] **Secrets management:** server secrets (.env files) pulled from Proton Pass via pass-cli instead of plaintext files
+- [x] **Secrets management:** all .env files replaced with sops + age encrypted secrets (free; Proton Pass CLI needed a higher plan)
 - [ ] Centralised logging or SIEM (Wazuh or Loki)
 - [ ] Hand-built WireGuard tunnel
 - [ ] Internal DNS zone and private CA for TLS
