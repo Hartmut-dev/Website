@@ -27,11 +27,13 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Backseat
 - [ ] **CTF lab phase 2:** Kali and target VMs on the homelab (phase 1 isolated network is built and tested)
+- [ ] **Anonymity & routing lab:** proxychains, Tor and multi-hop from a Kali VM, with Wireshark at each hop to see what every observer can and can't see
 
 ## Side projects
 - [ ] **RTX 3070 Ti repair:** research and troubleshoot the instability under 3D load (driver vs VRAM vs power vs thermals), decide if it's fixable
 
 ## Later / ideas
+- [ ] **Secrets management:** server secrets (.env files) pulled from Proton Pass via pass-cli instead of plaintext files
 - [ ] Centralised logging or SIEM (Wazuh or Loki)
 - [ ] Hand-built WireGuard tunnel
 - [ ] Internal DNS zone and private CA for TLS
