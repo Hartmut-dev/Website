@@ -8,9 +8,6 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 - [[02_Host_OS_and_Virtualization]] - Ubuntu Server config, NVIDIA Container Toolkit, Docker vs KVM setup. 
 ##  Services & AI Stack 
 - [[03_Media_Server_Jellyfin]] - Docker Compose, NVENC hardware transcoding, storage mapping.
-- [[04_Local_LLM_Stack]] - Ollama, Open WebUI, and `qwen3:8b` configurations. 
-##  Autonomous Security & CTF Lab 
-- [[05_HITL_Security_Agent]] - The `agent.py` script, ReAct loop, and Lynis auditing workflow. 
-- [[06_CTF_Virtual_Environments]] - KVM isolation, Kali Linux portable/VM setups. 
+- [[04_Local_LLM_Stack]] - Ollama, Open WebUI, and `qwen3:8b` configurations.  
 ##  Logs & Maintenance 
 - [[Maintenance_Log]] - Running notes on updates, bug fixes, and changes.
