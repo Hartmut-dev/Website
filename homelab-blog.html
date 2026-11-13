@@ -170,7 +170,7 @@
 
             <h3>Next: Core Network Services</h3>
             <ul>
-                <li><strong>Pi-hole + Unbound:</strong> Self-hosted recursive DNS with ad-blocking, rolled out to the tailnet first and the household second.</li>
+                <li><strong>Pi-hole + Unbound (done):</strong> Self-hosted recursive DNS with ad-blocking, live on the tailnet and my home router.</li>
                 <li><strong>Wake-on-LAN:</strong> The always-on server wakes workstations on demand, reachable remotely through the Tailscale mesh.</li>
                 <li><strong>Monitoring & Alerting:</strong> Uptime Kuma, followed by Prometheus and Grafana with SNMP polling.</li>
                 <li><strong>LLM Triage Agent:</strong> Deterministic scripts collect health data; a local model on the GTX 1080 summarises and escalates. No privileged access, and hardened against prompt injection from log content.</li>
@@ -192,6 +192,17 @@
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             
             <h2>Update Logs</h2>
+            <div class="log-entry">
+                <span class="log-date">November 14, 2026</span>
+                <p><strong>Self-Hosted DNS: Pi-hole + Unbound:</strong> The homelab is now the DNS server for every device I use. <strong>Pi-hole</strong> acts as a DNS sinkhole, answering lookups for ~78,000 known ad, tracker and malware domains with a dead end, so they're blocked on every device, including the smart TV and phone apps where an ad blocker can't be installed. Instead of forwarding everything to Google or Cloudflare, Pi-hole's only upstream is <strong>Unbound</strong>, a recursive resolver I built from Alpine's official package. It walks the DNS hierarchy itself, from the root servers down, validating DNSSEC signatures on the way, so no single provider sees my full browsing history. A deliberately broken DNSSEC test domain is correctly rejected.</p>
+                <p><strong>Rolled Out in Two Phases:</strong> First the tailnet: every device running Tailscale uses Pi-hole wherever it is, even on mobile data. The server itself opts out and keeps its own resolver, so a DNS failure can never stop it from fixing itself. Then my home router: a DHCP reservation pins the server's address, and the router's DHCP now hands out Pi-hole as the DNS server, so the TV and phone are covered with no app. Devices are named under <code>.home.arpa</code>, the suffix reserved for home networks by RFC 8375. The first surprise from the dashboard: the TV made around 1,400 lookups in fifteen minutes.</p>
+                <p><strong>Debugging the Rollout:</strong> Five real issues came up along the way. Every tailnet device appeared as one client, because Tailscale's subnet-router masquerade rule was rewriting addresses after Docker forwarded the traffic into the container. The router silently handed out <em>itself</em> as a secondary DNS server when that field was left blank, a quiet bypass. My desktop still had Google DNS hard-coded from years ago. Pi-hole cached device names for an hour. And running a commercial VPN alongside Tailscale broke DNS entirely, because the two VPNs fought over routing.</p>
+                <p><strong>Router Hardening:</strong> While I was in the router: firmware updated, the admin password replaced with a long random one stored in a password manager, and remote management and WPS confirmed off.</p>
+                <p><strong>Latest Documentation Release:</strong></p>
+                <ul>
+                    <li><a href="docs/13_DNS_Pihole_and_Unbound.md" class="nav-link" style="margin-bottom: 0.5rem; font-size: 0.95rem;">&#128196; [Download] 13 - DNS: Pi-hole &amp; Unbound (.md)</a></li>
+                </ul>
+            </div>
             <div class="log-entry">
                 <span class="log-date">November 13, 2026</span>
                 <p><strong>Memory Upgrade: 16GB to 32GB:</strong> The lab's biggest bottleneck is gone. A secondhand pair of 16GB Crucial DDR4-2666 sticks replaced the original 2x8GB kit, doubling the RAM to the board's two-slot maximum. Used memory is a gamble, so before buying I checked the part number on the label and counted the memory chips in the photos (eight per side is right for a 16GB module), and after installing, nothing was trusted until it was tested.</p>

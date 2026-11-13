@@ -13,6 +13,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 - [[12_File_Sharing_qBittorrent_and_VPN]] - qBittorrent behind a gluetun VPN kill switch, leak tests, and a command cheat sheet.
 ##  Networking & Remote Access 
 - [[08_Network_Topology]] - Double NAT layout, addressing, and planned VLAN segmentation.
+- [[13_DNS_Pihole_and_Unbound]] - Pi-hole + Unbound recursive DNS for the tailnet and home LAN, DHCP setup, and troubleshooting.
 - [[09_Remote_Access_Tailscale_and_Tunnels]] - Tailscale mesh VPN, `tailscale serve`, and the playit.gg tunnel.
 ##  Security & Hardening 
 - [[10_Host_Hardening]] - SSH key-only auth, ufw, fail2ban, sysctl hardening, and Lynis audits.

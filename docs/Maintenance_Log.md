@@ -3,6 +3,11 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ---
 
+### 2026-11-14
+*   **New service:** Pi-hole + Unbound. DNS for all Tailscale devices, then the home router (DHCP reservation + DHCP DNS). Devices named under `.home.arpa`. See [[13_DNS_Pihole_and_Unbound]].
+*   **Fixed:** Tailscale masquerading hid client IPs (`--snat-subnet-routes=false`); router handed out itself as secondary DNS; desktop had static Google DNS.
+*   **Router:** firmware updated, admin password rotated, remote management and WPS off.
+
 ### 2026-11-13
 *   **Hardware:** RAM upgraded 16GB -> 32GB (2x16GB DDR4-2666). memtester 12G: all ok; Memtest86+: 2 passes, 0 errors. See [[01_Hardware_and_Storage]].
 *   **Verified:** First reboot since the CDI fix; GPU containers, VPN, Tailscale and all services came back unattended.

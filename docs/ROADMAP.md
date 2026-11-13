@@ -10,7 +10,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Minecraft idle auto-stop:** check player count over RCON, stop after ~20 min empty, start on demand from Crafty
 
 ## Next (quick networking wins)
-- [ ] **Pi-hole + Unbound:** own recursive DNS, tailnet first, then the whole house
+- [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)
 - [ ] **Wake-on-LAN:** homelab wakes the desktop over LAN, reachable through Tailscale
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
 - [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
