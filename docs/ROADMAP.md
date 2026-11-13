@@ -4,9 +4,9 @@ Focus: networking skills, with security built into each project.
 Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Now
-- [~] **Docs pipeline:** GitHub deploy key on the homelab, Claude edits and pushes docs on request, secret scanning before every commit
+- [x] **Docs pipeline:** GitHub deploy key on the homelab, Claude edits and pushes docs on request, secret scanning before every commit
 - [ ] **Daily GitHub activity:** one real, small piece of work each day (log entry, script, doc, fix). No fake commit generators
-- [ ] **Folder cleanup:** sort out backups and script folders, then put configs and scripts under git
+- [x] **Folder cleanup:** scripts/logs/archive layout, leftovers quarantined (configs under git -> see Infrastructure as Code)
 - [ ] **Minecraft idle auto-stop:** check player count over RCON, stop after ~20 min empty, start on demand from Crafty
 
 ## Next (quick networking wins)
@@ -16,7 +16,30 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
 - [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only
 - [ ] **Website hardening:** security headers, TLS check
+- [ ] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
+
+## Networking projects (committed)
+- [ ] **Remove the double NAT:** ISP modem into bridge mode so my router holds the public IP; may fix "not connectable" for torrents
+- [ ] **Packet capture series:** Wireshark write-ups of my own services: DNS recursion hop by hop, Tailscale/WireGuard handshake, VPN tunnel, Minecraft protocol
+- [ ] **ISP quality monitoring:** SmokePing graphs of NBN latency and packet loss, 24/7
+- [ ] **Traffic flow analysis:** ntopng, per-device and per-country traffic, paired with Pi-hole's DNS view
+- [ ] **IPv6 lab:** dual-stack the network, SLAAC vs DHCPv6, ICMPv6, IPv6-aware Pi-hole and firewall rules
+- [ ] **Network automation (after the switches):** Ansible/Netmiko switch config, automatic config backups to git (Oxidized)
+- [ ] **802.1X (after the switches):** port authentication with FreeRADIUS
+
+## Security projects (in priority order)
+- [ ] **HTTPS everywhere:** Caddy reverse proxy with Tailscale certs or a private CA, replacing plain http://host:port
+- [ ] **Single sign-on + MFA:** Authentik in front of the web UIs (identity & access management)
+- [ ] **Weekly vulnerability scans:** Greenbone/OpenVAS + nmap baseline diffs, fed to the janitor ("new open port since last week")
+- [ ] **Pentest my own server:** after the hardening above, attack the homelab from a Kali VM, report findings like a real engagement, fix and re-test
+- [ ] **Honeypot + purple team:** isolated Cowrie SSH honeypot feeding the SIEM; attack the lab, detect it, write an incident report
+- [ ] **Infrastructure as Code:** Ansible playbooks that rebuild the homelab config, kept in a private git repo
+
+## Career & portfolio
+- [ ] **Projects page:** short case studies (problem -> what I did -> result) linking to the blog and docs
+- [ ] **Architecture diagram:** one clear diagram of the whole lab (network, services, trust boundaries) on the site
+- [ ] **Certification map:** tag roadmap items with the CCNA / Security+ objectives they cover
 
 ## Local AI agents (after the janitor)
 - [ ] **Model bake-off:** eval harness of homelab tasks with checkable answers; compare qwen3:8b vs deepseek-r1:8b (vs DeepSeek V4.1 via API for non-sensitive tasks) on accuracy, speed and VRAM, then assign models per job
@@ -55,7 +78,11 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] Hand-built WireGuard tunnel
 - [ ] Internal DNS zone and private CA for TLS
 - [ ] Off-site backup copy, auditd, disable UPnP on both routers
+- [ ] **Disaster recovery drill:** rebuild the server from backups onto a spare disk and time it
 
 ## Fun / miscellaneous
 - [ ] **Website aesthetic overhaul:** visual redesign once hardening is done
+- [ ] **Build a vulnerable machine:** my own CTF box with planted flaws, plus a walkthrough write-up
+- [ ] **AI red team:** can local 9B agents hack my vulnerable box? Strictly contained: isolated CTF network (no internet, no route to host/LAN), agent sandbox that can only reach the target, kill switch, full logging
+- [ ] **Stream Deck control panel:** buttons on the desktop calling a small authenticated homelab API over Tailscale (status, start/stop Minecraft, pause Pi-hole, VPN check, wake desktop); fixed action list, no arbitrary commands
 - [ ] **Minecraft helper bot:** `!ask` in game chat, answered by the local LLM from the modpack's wikis
