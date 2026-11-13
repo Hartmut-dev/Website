@@ -19,7 +19,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Website hardening:** security headers, TLS check
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
-## After the RAM upgrade to 32 GB (end of Nov 2026)
+## Unlocked by the RAM upgrade (32 GB installed 2026-11-13)
 - [ ] **Physical network gear:** secondhand managed switches (Cisco Catalyst 2960/3560 class), console access, VLANs/trunks/STP/EtherChannel on real hardware, a 2-4 port NIC for the homelab, hybrid physical + virtual labs
 - [ ] **Network restructure:** managed switch, OPNsense/pfSense, VLANs (trusted / homelab / IoT / guest / CTF) with firewall rules between them
 - [ ] **Containerlab routing labs:** OSPF and BGP (CCNA prep)

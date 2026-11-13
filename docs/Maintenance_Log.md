@@ -3,6 +3,10 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ---
 
+### 2026-11-13
+*   **Hardware:** RAM upgraded 16GB -> 32GB (2x16GB DDR4-2666). memtester 12G: all ok; Memtest86+: 2 passes, 0 errors. See [[01_Hardware_and_Storage]].
+*   **Verified:** First reboot since the CDI fix; GPU containers, VPN, Tailscale and all services came back unattended.
+
 ### 2026-11-12
 *   **Security:** All service `.env` files replaced with sops + age encrypted secrets; plain-text copies (including 15 backup snapshots) shredded. See [[10_Host_Hardening]].
 *   **New service:** qBittorrent behind gluetun (PureVPN, OpenVPN/TCP). Kill switch tested. See [[12_File_Sharing_qBittorrent_and_VPN]].

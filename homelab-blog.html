@@ -178,7 +178,7 @@
                 <li><strong>Web Hardening:</strong> Security headers and TLS review for this site.</li>
             </ul>
 
-            <h3>After the 32GB RAM Upgrade</h3>
+            <h3>Unlocked by the 32GB RAM Upgrade</h3>
             <ul>
                 <li><strong>Network Segmentation:</strong> Managed switch and OPNsense/pfSense firewall with VLANs for trusted, lab, IoT, guest and CTF traffic.</li>
                 <li><strong>Physical Network Lab:</strong> Secondhand enterprise switches for hands-on VLAN trunking, spanning tree, link aggregation and inter-VLAN routing, connected to the virtual lab for hybrid topologies.</li>
@@ -192,6 +192,12 @@
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             
             <h2>Update Logs</h2>
+            <div class="log-entry">
+                <span class="log-date">November 13, 2026</span>
+                <p><strong>Memory Upgrade: 16GB to 32GB:</strong> The lab's biggest bottleneck is gone. A secondhand pair of 16GB Crucial DDR4-2666 sticks replaced the original 2x8GB kit, doubling the RAM to the board's two-slot maximum. Used memory is a gamble, so before buying I checked the part number on the label and counted the memory chips in the photos (eight per side is right for a 16GB module), and after installing, nothing was trusted until it was tested.</p>
+                <p><strong>Validation:</strong> A quick in-OS check with <code>memtester</code> passed all 18 tests on 12GB of free memory, followed by a full <strong>Memtest86+</strong> run outside the operating system: two complete passes over all 32GB with zero errors. Only then did the old kit go up for sale. The reboot also doubled as a real-world test of last week's GPU fix: every service, including the GPU containers, the VPN tunnel and Tailscale, came back unattended.</p>
+                <p><strong>What It Unlocks:</strong> The game server no longer competes with the AI and media stacks for memory, and the roadmap's "after the RAM upgrade" phase is now open: a physical and virtual network lab, Containerlab routing practice, and the next phase of the CTF environment.</p>
+            </div>
             <div class="log-entry">
                 <span class="log-date">November 12, 2026</span>
                 <p><strong>Encrypting Secrets at Rest:</strong> While setting up the VPN, I took a closer look at where the lab's secrets actually lived, and didn't like the answer. VPN credentials, the tunnel key and API keys sat in plain-text <code>.env</code> files, and the nightly backup job was faithfully copying them to the second disk every day, with 30 days of retention. Fifteen copies of every secret, in plain text, in a backup folder.</p>

@@ -3,7 +3,7 @@ This homelab is built on a bare-metal architecture utilizing a mix of new and re
 
 *   **CPU:** AMD Ryzen 5 5600 (6-core)
 *   **GPU:** NVIDIA GeForce GTX 1080 (8GB VRAM) - *Used for NVENC media transcoding and local LLM acceleration.*
-*   **Memory:** 16GB RAM (2x8GB)
+*   **Memory:** 32GB DDR4-2666 (2x16GB Crucial, CL19), upgraded Nov 2026 from 16GB (2x8GB). Board has 2 slots, so 32GB is the ceiling for this build.
 *   **Boot Drive:** 1TB NVMe SSD
 *   **Bulk Storage:** 2TB HDD
 
@@ -61,3 +61,23 @@ UUID=<your-uuid-here> /mnt/storage ext4 defaults 0 2
 ```bash
 sudo mount -a df -h /mnt/storage
 ```
+
+---
+
+##  RAM Upgrade & Validation (Nov 2026)
+Secondhand 2x16GB Crucial DDR4-2666 UDIMMs replaced the original 2x8GB kit. Used RAM was validated before the old kit was sold:
+
+**1. Quick in-OS check (no downtime):** tests only the memory that is free while Linux runs.
+```bash
+sudo apt install -y memtester
+sudo memtester 12G 1        # all 18 tests: ok
+```
+
+**2. Full test (Memtest86+, runs instead of the OS):**
+```bash
+sudo apt install -y memtest86+   # adds a boot menu entry
+sudo reboot                      # hold Shift (legacy BIOS boot) -> "Memory test (memtest86+x64.bin)"
+```
+**Result:** 2 full passes over all 32GB in about 1h15m, **0 errors**.
+
+(Buying tips learned: check the full label for the part number, count the memory chips in photos, 8 per side for 16GB, and test before selling the old kit.)

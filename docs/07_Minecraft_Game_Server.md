@@ -64,12 +64,12 @@ services:
 ---
 
 ##  Memory Management
-With 16GB of system RAM shared between Minecraft, Jellyfin, the LLM stack, and the host, memory is the tightest resource:
+Originally the host had 16GB of system RAM shared between Minecraft, Jellyfin, the LLM stack, and the host, which made memory the tightest resource:
 
 *   **Java heap:** 8.5GB (set in Crafty), inside the 11GB container limit to leave room for Java's off-heap memory.
 *   **On-demand running:** The server is stopped when nobody is playing, freeing ~11GB for other work.
 *   **Planned:** An RCON script that checks the player count and stops the server after ~20 minutes empty. See [[ROADMAP]].
-*   **Planned:** RAM upgrade to 32GB, which removes most of the pressure.
+*   **Done (Nov 2026):** RAM upgraded to 32GB, which removes most of the pressure; idle auto-stop is now a nice-to-have.
 
 ---
 
