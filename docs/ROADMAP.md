@@ -45,6 +45,8 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Side projects
 - [ ] **RTX 3070 Ti repair:** research and troubleshoot the instability under 3D load (driver vs VRAM vs power vs thermals), decide if it's fixable
+- [ ] **Dual-GPU inference (if the 3070 Ti is saved):** 1080 + 3070 Ti = 16GB VRAM for 14B models via Ollama layer split
+- [ ] **Motherboard upgrade (if dual-GPU):** AM4 board with two full-length slots and proper spacing (keeps CPU + RAM); check case and PSU fit first
 
 ## Later / ideas
 - [ ] **(Maybe) CCNA tutor:** local LLM quizzes from study notes; a script generates and checks subnetting maths
