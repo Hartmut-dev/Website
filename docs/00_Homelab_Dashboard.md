@@ -20,5 +20,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 ##  Backups & Maintenance 
 - [[11_Backup_Strategy]] - Crafty backups, NVMe to HDD copies, and retention policy.
 - [[Maintenance_Log]] - Running notes on updates, bug fixes, and changes.
+##  AI & Knowledge 
+- [[14_AI_Second_Brain_Obsidian_Vault]] - Obsidian vault of linked notes as the AI assistant's long-term memory: structure, session workflow, verification.
 ##  Planning 
 - [[ROADMAP]] - What's being worked on now, next, and after the RAM upgrade.
