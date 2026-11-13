@@ -14,9 +14,10 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
 - [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
-- [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only
+- [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only; also the media auto-sort fallback: when the name parser isn't confident, proposes show/movie + folder for my approval (torrent names treated as untrusted input; proposes only, never moves files itself)
 - [ ] **Website hardening:** security headers, TLS check
 - [ ] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com
+- [ ] **Media auto-sort:** qBittorrent finished-hook + categories (tv/movies); guessit name parsing; hard links into tvshows/ or movies/ (folders created as needed), unsure -> unsorted/; Jellyfin rescan via API. Torrent names treated as untrusted input (no shell, no ../ paths)
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
 ## Networking projects (committed)
