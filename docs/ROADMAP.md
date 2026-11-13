@@ -11,13 +11,19 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Next (quick networking wins)
 - [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)
-- [ ] **Wake-on-LAN:** homelab wakes the desktop over LAN, reachable through Tailscale
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
 - [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
 - [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only
 - [ ] **Website hardening:** security headers, TLS check
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
+
+## When the Raspberry Pi arrives (~Dec 2026)
+- [ ] **Wake-on-LAN:** Pi as always-on relay, so the phone can wake the desktop *and* the homelab from anywhere via Tailscale; BIOS "restore on AC power loss" on the homelab
+- [ ] **Secondary Pi-hole:** second DNS server on the Pi, removing the homelab as a single point of failure for home DNS
+- [ ] **Off-box monitoring:** Uptime Kuma on the Pi watches the homelab and alerts the phone when it's down (a monitor that doesn't die with the thing it monitors)
+- [ ] **Backup tailnet access:** Pi as Tailscale subnet router / exit node, so the home network stays reachable if the homelab is off
+- [ ] **More Pi ideas to explore:** UPS monitoring (NUT), PiKVM-style out-of-band console for the homelab, janitor heartbeat watchdog
 
 ## Unlocked by the RAM upgrade (32 GB installed 2026-11-13)
 - [ ] **Physical network gear:** secondhand managed switches (Cisco Catalyst 2960/3560 class), console access, VLANs/trunks/STP/EtherChannel on real hardware, a 2-4 port NIC for the homelab, hybrid physical + virtual labs
