@@ -18,6 +18,12 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Website hardening:** security headers, TLS check
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
+## Local AI agents (after the janitor)
+- [ ] **Model bake-off:** eval harness of homelab tasks with checkable answers; compare qwen3:8b vs deepseek-r1:8b (vs DeepSeek V4.1 via API for non-sensitive tasks) on accuracy, speed and VRAM, then assign models per job
+- [ ] **Workhorse loop:** generate -> verify automatically (run tests in a no-network sandbox container) -> feed errors back -> repeat; first job: the Minecraft idle auto-stop script
+- [ ] **Auditor ("spy"):** read-only agent watching inter-agent messages for prompt injection, out-of-role requests and anomalies; reports only
+- [ ] **Engineer:** designs the server rack (U layout, shelf vs 4U rack case for the ATX tower, airflow, power, cabling, shopping list); designs cross-checked by Claude
+
 ## When the Raspberry Pi arrives (~Dec 2026)
 - [ ] **Wake-on-LAN:** Pi as always-on relay, so the phone can wake the desktop *and* the homelab from anywhere via Tailscale; BIOS "restore on AC power loss" on the homelab
 - [ ] **Secondary Pi-hole:** second DNS server on the Pi, removing the homelab as a single point of failure for home DNS
