@@ -66,3 +66,12 @@ Docker cannot see or use the physical GPU by default. The NVIDIA Container Toolk
  docker run --rm --device nvidia.com/gpu=all ubuntu nvidia-smi
  ```
  (Full write-up in [[03_Media_Server_Jellyfin]].)
+
+---
+
+# Updates & Maintenance
+* **Process:** updates go through a reviewed script that writes its own log (piping `apt` through `tee` once left it stopped mid-run), runs non-interactively and keeps locally edited config files (`--force-confold`; new package defaults land as `.dpkg-dist` for review).
+* **Reboot test after every significant change.** Hardening and driver changes can break things silently until the next boot, so a deliberate reboot follows, then every container, GPU access, DNS, Tailscale and the game tunnel are checked.
+* **Nov 2026:** 72 packages (systemd, containerd, NVIDIA Container Toolkit 1.20.1 -> 1.20.2, libvirt/qemu); reboot test passed, GPU still visible in both GPU containers via CDI.
+* **Timezone:** the server clock moved from UTC to local time (`Australia/Perth`, UTC+8) in Nov 2026; the hardware clock stays UTC. Lesson: timestamps written without an offset break on such a change, so logs now include it (see [[05_LLM_Janitor]]).
+* Pending updates and reboot requirements are watched by the janitor's hourly checks.

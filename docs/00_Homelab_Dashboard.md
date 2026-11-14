@@ -9,6 +9,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 ##  Services & AI Stack 
 - [[03_Media_Server_Jellyfin]] - Docker Compose, NVENC hardware transcoding, storage mapping.
 - [[04_Local_LLM_Stack]] - Ollama, Open WebUI, and `qwen3:8b` configurations. 
+- [[05_LLM_Janitor]] - Local AI health agent: hourly checks, validated daily digest, config drift, log triage, and phone alerts via self-hosted ntfy.
 - [[07_Minecraft_Game_Server]] - Crafty Controller, modpack management, schedules, and memory limits.
 - [[12_File_Sharing_qBittorrent_and_VPN]] - qBittorrent behind a gluetun VPN kill switch, leak tests, and a command cheat sheet.
 ##  Networking & Remote Access 
@@ -19,6 +20,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 - [[10_Host_Hardening]] - SSH key-only auth, ufw, fail2ban, sysctl hardening, and Lynis audits.
 ##  Backups & Maintenance 
 - [[11_Backup_Strategy]] - Crafty backups, NVMe to HDD copies, and retention policy.
+- [[05_LLM_Janitor]] - Monitoring and alerting (see above).
 - [[Maintenance_Log]] - Running notes on updates, bug fixes, and changes.
 ##  AI & Knowledge 
 - [[14_AI_Second_Brain_Obsidian_Vault]] - Obsidian vault of linked notes as the AI assistant's long-term memory: structure, session workflow, verification.

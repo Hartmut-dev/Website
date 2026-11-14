@@ -115,6 +115,17 @@ sudo sysctl -p /etc/sysctl.d/91-nonlocal-bind.conf
 # The server keeps its own resolver: it must never depend on its own Pi-hole container
 sudo tailscale set --accept-dns=false
 
+# ...and must also ignore the DNS server the home router hands out by DHCP (Troubleshooting #6).
+# /etc/netplan/90-dns-not-pihole.yaml:
+#   network:
+#     version: 2
+#     ethernets:
+#       enp3s0:
+#         dhcp4-overrides: {use-dns: false}
+#         dhcp6-overrides: {use-dns: false}   # must match dhcp4, or netplan refuses the file
+#         nameservers: {addresses: [9.9.9.9, 1.1.1.1]}
+sudo netplan generate && sudo netplan apply
+
 # Web UI on the tailnet
 sudo tailscale serve --bg --tcp 8082 tcp://localhost:8082
 
@@ -157,6 +168,7 @@ Pi-hole's log confirmed every lookup was `forwarded ... to 172.30.53.2` (Unbound
 3.  **Desktop ignored the router's DNS.** It had Google DNS (`8.8.8.8`) set statically years ago, which overrides DHCP. Switched the adapter back to automatic.
 4.  **Client names didn't appear after adding records.** Pi-hole caches client names from PTR lookups and refreshes them hourly; a container restart forces it.
 5.  **No sites loaded with a commercial VPN on.** Two VPNs on one machine: the VPN app hijacked routing and DNS, so the Tailscale path to Pi-hole broke. Split tunnelling didn't help (the VPN's DNS leak protection forces its own DNS). Workaround: disconnect Tailscale while the VPN is in use; at home, the LAN path to Pi-hole still applies.
+6.  **The server started using its own Pi-hole.** Phase 2 made the router's DHCP hand out Pi-hole, and the server's network config accepted DHCP DNS too, quietly breaking the "never depend on yourself" rule (`--accept-dns=false` only covers Tailscale). Found a day later by the janitor's log triage (384 resolver fallback messages a day, see [[05_LLM_Janitor]]). Fixed with the netplan override above. The first attempt failed because netplan requires the same `use-dns` value for DHCPv4 and DHCPv6, so the script now removes its file if `netplan generate` fails, keeping a bad file from breaking the next boot.
 
 ---
 

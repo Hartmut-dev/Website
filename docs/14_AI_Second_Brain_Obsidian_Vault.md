@@ -108,5 +108,5 @@ The vault lives on the server, but I want to browse it in Obsidian on my desktop
 ---
 
 ##  Next Steps
-*   **Agents write to it:** the planned janitor and other local LLM agents will file their reports as linked notes, and the Librarian will answer questions from it. Agents that read this private data will never also read untrusted input *and* take actions.
+*   **Agents write to it:** the janitor (live since Nov 2026, see [[05_LLM_Janitor]]) currently writes its reports to its own folder; it and later local agents will file them as linked notes, and the Librarian will answer questions from it. Agents that read this private data will never also read untrusted input *and* take actions.
 *   Separately: self-hosted sync for my personal study vault (Self-hosted LiveSync + CouchDB, works on iPhone).

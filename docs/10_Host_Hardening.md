@@ -217,4 +217,6 @@ grep hardening_index /var/log/lynis-report.dat
 | Baseline (Oct 2026) | 66 |
 | After round 2 | 71, no warnings |
 
+**Continuous checks:** the janitor compares the host hourly against an approved baseline (listening ports, containers and published ports, services, cron, sysctl values, users, SSH config hashes). A new port on a LAN or public address is critical immediately, since Docker-published ports bypass ufw. See [[05_LLM_Janitor]].
+
 **Remaining (optional):** auditd, off-site backups, disabling UPnP on both routers.

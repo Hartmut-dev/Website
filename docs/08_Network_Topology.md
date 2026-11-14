@@ -50,6 +50,8 @@ The host firewall (`ufw`) defaults to **deny inbound**, with a short allow-list:
 *   SSH from the home LAN subnet only.
 *   DNS and DHCP for the libvirt VM network.
 
+**DNS:** every LAN and tailnet device uses Pi-hole, except the server itself, which uses public resolvers directly so it never depends on its own container (see [[13_DNS_Pihole_and_Unbound]]).
+
 Full details in [[10_Host_Hardening]].
 
 ---
