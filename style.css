@@ -1,0 +1,469 @@
+/* hartmutk.dev shared stylesheet.
+   Page rules are scoped by <body class="page-..."> so pages cannot affect each other. */
+
+/* ---------- shared ---------- */
+:root {
+    --bg-color: #0d1117;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --ok: #3fb950;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- index.html ---------- */
+
+body.page-home header {
+    width: 100%;
+    max-width: 800px;
+    padding: 4rem 2rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+body.page-home .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+body.page-home .header-text h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+    margin-top: 0;
+}
+
+body.page-home .header-text h2 {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+body.page-home .header-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    object-position: 50% 45%;
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    body.page-home .header-content {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
+
+body.page-home main {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+body.page-home .section-title {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+body.page-home .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+body.page-home .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+body.page-home .card-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+body.page-home .links-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+body.page-home .btn {
+    background-color: var(--card-bg);
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+body.page-home .btn:hover {
+    background-color: var(--accent);
+    color: var(--bg-color);
+    border-color: var(--accent);
+}
+
+body.page-home .contact-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+body.page-home footer {
+    margin-top: auto;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+body.page-home .fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- homelab-blog.html ---------- */
+
+body.page-blog .blog-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+body.page-blog .nav-link {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+body.page-blog .nav-link:hover {
+    text-decoration: underline;
+}
+
+body.page-blog .blog-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+body.page-blog h1 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
+}
+
+body.page-blog .post-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+body.page-blog .blog-content h2 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+body.page-blog .blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+body.page-blog .log-entry {
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 4px 4px 0;
+}
+
+body.page-blog .log-date {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+body.page-blog .roadmap-toggle-btn {
+    background-color: var(--card-bg);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+body.page-blog .roadmap-toggle-btn:hover {
+    background-color: var(--border);
+    border-color: var(--accent);
+}
+
+body.page-blog .roadmap-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+}
+
+body.page-blog .roadmap-wrapper {
+    display: none;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+body.page-blog .roadmap-wrapper h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+body.page-blog .roadmap-wrapper h3:first-of-type {
+    margin-top: 0;
+}
+
+body.page-blog .roadmap-wrapper ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* ---------- projects.html ---------- */
+
+body.page-projects .container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+body.page-projects .nav-link {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+body.page-projects .nav-link:hover {
+    text-decoration: underline;
+}
+
+body.page-projects .page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+body.page-projects h1 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    margin: 0 0 0.4rem;
+}
+
+body.page-projects .lede {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+body.page-projects .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+}
+
+body.page-projects .stat {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+body.page-projects .stat strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.3rem;
+}
+
+body.page-projects .stat span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+body.page-projects .toc {
+    margin: 2rem 0;
+    padding-left: 1.2rem;
+}
+
+body.page-projects .toc a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+body.page-projects .toc a:hover {
+    text-decoration: underline;
+}
+
+body.page-projects .case {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 1rem;
+}
+
+body.page-projects .case h2 {
+    color: #ffffff;
+    font-size: 1.35rem;
+    margin: 0 0 0.25rem;
+}
+
+body.page-projects .case .sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+}
+
+body.page-projects .case h3 {
+    color: var(--accent);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1.2rem 0 0.3rem;
+}
+
+body.page-projects .case p {
+    margin: 0 0 0.6rem;
+}
+
+body.page-projects .case ul {
+    margin: 0 0 0.6rem;
+    padding-left: 1.2rem;
+}
+
+body.page-projects .case li {
+    margin-bottom: 0.25rem;
+}
+
+body.page-projects .result {
+    border-left: 3px solid var(--ok);
+    padding: 0.4rem 0 0.4rem 0.9rem;
+    margin: 0.3rem 0 0.6rem;
+}
+
+body.page-projects .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+body.page-projects .tag {
+    font-size: 0.78rem;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.1rem 0.6rem;
+}
+
+body.page-projects .links {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+body.page-projects .btn {
+    background-color: var(--bg-color);
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+body.page-projects .btn:hover {
+    background-color: var(--accent);
+    color: var(--bg-color);
+    border-color: var(--accent);
+}
+
+body.page-projects code {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0 0.3rem;
+    font-size: 0.88em;
+}
+
+body.page-projects .more h2 {
+    color: #ffffff;
+    font-size: 1.35rem;
+}
+
+body.page-projects .more li {
+    margin-bottom: 0.4rem;
+}
+
+body.page-projects footer {
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    body.page-projects .container {
+        padding: 1.25rem 1rem;
+    }
+    body.page-projects h1 {
+        font-size: 1.8rem;
+    }
+}
