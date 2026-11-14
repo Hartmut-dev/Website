@@ -3,7 +3,8 @@ This homelab is built on a bare-metal architecture utilizing a mix of new and re
 
 *   **CPU:** AMD Ryzen 5 5600 (6-core)
 *   **GPU:** NVIDIA GeForce GTX 1080 (8GB VRAM) - *Used for NVENC media transcoding and local LLM acceleration.*
-*   **Memory:** 32GB DDR4-2666 (2x16GB Crucial, CL19), upgraded Nov 2026 from 16GB (2x8GB). Board has 2 slots, so 32GB is the ceiling for this build.
+*   **Memory:** 32GB DDR4-2666 (2x16GB Crucial, CL19), upgraded Nov 2026 from 16GB (2x8GB). The board has 2 slots and supports up to 64GB (2x32GB), so there is still an upgrade path.
+*   **Motherboard:** Biostar B550MH (Micro ATX): one PCIe 4.0 x16 slot (supports x4/x4/x4/x4 bifurcation, so a second GPU via a riser is possible without a new board), two PCIe 3.0 x1 slots, one M.2, four SATA, 1GbE Realtek, and only one system fan header.
 *   **Boot Drive:** 1TB NVMe SSD
 *   **Bulk Storage:** 2TB HDD
 
