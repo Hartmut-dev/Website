@@ -11,7 +11,7 @@ Running notes on updates, fixes, and changes. Newest first.
 *   **Fixed:** Tailscale masquerading hid client IPs (`--snat-subnet-routes=false`); router handed out itself as secondary DNS; desktop had static Google DNS.
 *   **Updates:** 72 packages (systemd, containerd, NVIDIA container toolkit 1.20.2, libvirt/qemu) via a self-logging script, then a reboot test: all 9 containers, GPU passthrough, DNS, Tailscale and the playit tunnel came back unattended. Server timezone UTC -> Australia/Perth.
 *   **LLM janitor step 2:** daily digest by qwen3:8b (JSON schema, validated against the script's facts, template fallback). Tested with planted faults + a prompt injection. Fixed a false backup alarm: log timestamps now include the UTC offset.
-*   **Website:** new Projects page with six case studies; homepage lab card refreshed and linked.
+*   **Website:** new Projects page with six case studies; homepage lab card and automation card rewritten from placeholders to real work; blog roadmap section rewritten as Done / Now / Next to match the roadmap.
 *   **LLM janitor steps 6-7 (complete):** SQLite GPU job queue that yields to Jellyfin; graded fault-injection suite, 25/25 after fixing a triage blind spot (rare lines never reviewed) and adding a script-level "suspicious" flag after the model labelled an injected line as noise.
 *   **LLM janitor steps 3-5:** transition-based alert logic (ntfy staged), hourly config-drift check against an approved baseline, daily log triage with a human-approved noise list.
 *   **Fixed:** the server was using its own Pi-hole via router DHCP (breaks the "infrastructure doesn't depend on itself" rule). Now ignores DHCP DNS and uses public resolvers directly.

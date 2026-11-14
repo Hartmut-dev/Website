@@ -7,6 +7,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Docs pipeline:** GitHub deploy key on the homelab, Claude edits and pushes docs on request, secret scanning before every commit
 - [ ] **Daily GitHub activity:** one real, small piece of work each day (log entry, script, doc, fix). No fake commit generators
 - [x] **Folder cleanup:** scripts/logs/archive layout, leftovers quarantined (configs under git -> see Infrastructure as Code)
+- [ ] **Portfolio:** architecture diagram + certification map (see Career & portfolio below)
 - [ ] **Minecraft idle auto-stop:** check player count over RCON, stop after ~20 min empty, start on demand from Crafty
 
 ## Next (quick networking wins)

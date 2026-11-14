@@ -156,50 +156,60 @@
         </div>
         
         <button class="roadmap-toggle-btn" id="roadmapBtn">
-            <span>View Project Implementation Roadmap</span>
+            <span>View Roadmap: Done, Now &amp; Next</span>
             <span class="roadmap-arrow" id="roadmapArrow">▼</span>
         </button>
         
         <div class="roadmap-wrapper" id="roadmapContent">
-            <h3>Now: Documentation & Daily Operations</h3>
+            <p style="margin-top: 0; color: var(--text-muted);">Focus: networking skills, with security built into every project. Short version below; the full checklist is in the <a href="docs/ROADMAP.md" style="color: var(--accent);">roadmap</a>, and finished work is written up on the <a href="projects.html" style="color: var(--accent);">Projects page</a>.</p>
+
+            <h3>Done So Far</h3>
             <ul>
-                <li><strong>Docs-as-Code Pipeline:</strong> A repository-scoped deploy key on the server lets documentation be edited and pushed straight from the lab, with secret scanning before every commit.</li>
-                <li><strong>Folder Consolidation:</strong> Retire migration leftovers and stray backups, then bring host scripts and configs under version control.</li>
-                <li><strong>Minecraft Resource Management:</strong> RCON-driven idle shutdown so the game server releases its memory when nobody is online.</li>
+                <li><strong>Zero-exposure hosting:</strong> every service bound to localhost; a public game server through an outbound tunnel and private admin over Tailscale, with no ports forwarded.</li>
+                <li><strong>Host hardening &amp; secrets:</strong> key-only SSH, ufw, fail2ban, kernel hardening (Lynis 66 &rarr; 71), sops + age encrypted secrets, gitleaks on every commit.</li>
+                <li><strong>Self-hosted recursive DNS:</strong> Pi-hole + Unbound with DNSSEC for every tailnet and home device.</li>
+                <li><strong>LLM Janitor:</strong> a local AI monitoring agent with validated output, phone alerts, config-drift detection, log triage, a GPU job queue and a graded fault-injection suite (25/25).</li>
+                <li><strong>Private file sharing</strong> behind a tested VPN kill switch; <strong>Jellyfin</strong> with GPU transcoding; backups across two disks.</li>
+                <li><strong>32GB RAM upgrade</strong> (validated with Memtest86+) and an <strong>Obsidian second brain</strong> that gives my AI assistant long-term memory.</li>
+                <li><strong>Portfolio:</strong> documentation pipeline with secret scanning, and a Projects page of case studies.</li>
             </ul>
 
-            <h3>Next: Core Network Services</h3>
+            <h3>Now</h3>
             <ul>
-                <li><strong>Pi-hole + Unbound (done):</strong> Self-hosted recursive DNS with ad-blocking, live on the tailnet and my home router.</li>
-                <li><strong>Monitoring & Alerting:</strong> Uptime Kuma, followed by Prometheus and Grafana with SNMP polling.</li>
-                <li><strong>LLM Triage Agent:</strong> Deterministic scripts collect health data; a local model on the GTX 1080 summarises and escalates. No privileged access, and hardened against prompt injection from log content.</li>
-                <li><strong>Threat-Intel Scout & Librarian:</strong> Two more local LLM roles, each compartmentalised: one filters security feeds for vulnerabilities affecting this stack (internet only, no system access), one answers questions about this documentation (read-only).</li>
-                <li><strong>Web Hardening:</strong> Security headers and TLS review for this site.</li>
+                <li><strong>Portfolio:</strong> one architecture diagram of the whole lab (network, services, trust boundaries) and a map of which projects cover which CCNA / Security+ objectives.</li>
+                <li><strong>Game server idle auto-stop:</strong> an RCON script that stops the server after ~20 minutes with nobody online.</li>
+                <li><strong>Daily GitHub activity:</strong> one real, small piece of work each day.</li>
             </ul>
 
-            <h3>Networking & Security Projects</h3>
+            <h3>Next: Network Services &amp; Automation</h3>
             <ul>
-                <li><strong>Networking:</strong> Remove the double NAT, IPv6 dual-stack, packet capture write-ups, ISP and traffic-flow monitoring, and Ansible automation plus 802.1X once the switches arrive.</li>
-                <li><strong>Security:</strong> HTTPS everywhere, single sign-on with MFA, weekly vulnerability scans, then a full pentest of my own server and a honeypot-driven purple team exercise.</li>
-                <li><strong>Portfolio:</strong> A projects page of case studies, a full architecture diagram, and a certification map.</li>
+                <li><strong>Monitoring:</strong> Uptime Kuma, then Prometheus + Grafana with SNMP.</li>
+                <li><strong>Remove the double NAT:</strong> ISP modem into bridge mode so my router holds the public IP.</li>
+                <li><strong>Media auto-sort:</strong> finished downloads sorted into the library automatically, with file names treated as untrusted input.</li>
+                <li><strong>Site hardening:</strong> security headers, a TLS review, and a GitHub Action secret scan that also covers edits made on github.com.</li>
+                <li><strong>More local AI roles:</strong> a threat-intel scout (security feeds only, no system access), a read-only Librarian for these docs, and a model bake-off with checkable tasks.</li>
             </ul>
 
-            <h3>When the Raspberry Pi Arrives</h3>
+            <h3>Networking Projects</h3>
             <ul>
-                <li><strong>Wake-on-LAN & Out-of-Band Access:</strong> An always-on Pi as a relay, so the phone can wake any machine at home through Tailscale, even when the main server is off.</li>
-                <li><strong>Redundant DNS & Off-Box Monitoring:</strong> A second Pi-hole to remove the single point of failure, and an uptime monitor that alerts the phone when the server goes down.</li>
+                <li>Packet-capture write-ups of my own services (DNS recursion, WireGuard handshake, VPN tunnel), ISP latency monitoring with SmokePing, traffic-flow analysis with ntopng, and an IPv6 dual-stack lab.</li>
+                <li><strong>Network segmentation:</strong> managed switch and OPNsense/pfSense with VLANs for trusted, lab, IoT, guest and CTF traffic.</li>
+                <li><strong>Physical &amp; routing labs:</strong> secondhand enterprise switches (trunking, spanning tree, link aggregation), OSPF and BGP in Containerlab, then Ansible automation and 802.1X.</li>
             </ul>
 
-            <h3>Unlocked by the 32GB RAM Upgrade</h3>
+            <h3>Security Projects</h3>
             <ul>
-                <li><strong>Network Segmentation:</strong> Managed switch and OPNsense/pfSense firewall with VLANs for trusted, lab, IoT, guest and CTF traffic.</li>
-                <li><strong>Physical Network Lab:</strong> Secondhand enterprise switches for hands-on VLAN trunking, spanning tree, link aggregation and inter-VLAN routing, connected to the virtual lab for hybrid topologies.</li>
-                <li><strong>Routing Labs:</strong> OSPF and BGP topologies in Containerlab as CCNA preparation.</li>
-                <li><strong>Self-Hosted AI Workspace:</strong> Trial Odysseus alongside Open WebUI, with mail and calendar connectors disabled.</li>
-                <li><strong>Enterprise Network Lab:</strong> A dedicated hypervisor environment (virtual routers, switches and firewalls) for practising enterprise topologies such as VLAN trunking, routing protocols and site-to-site VPNs.</li>
+                <li>HTTPS everywhere behind a reverse proxy, single sign-on with MFA, weekly vulnerability scans fed to the janitor, then a full pentest of my own server and a honeypot-driven purple-team exercise.</li>
+                <li><strong>Infrastructure as Code:</strong> Ansible playbooks that can rebuild the whole server.</li>
+            </ul>
+
+            <h3>When the Raspberry Pi Arrives (~Dec 2026)</h3>
+            <ul>
+                <li><strong>Wake-on-LAN relay</strong> so the phone can wake any machine at home through Tailscale.</li>
+                <li><strong>Redundant DNS &amp; off-box monitoring:</strong> a second Pi-hole, and an uptime monitor that alerts the phone when the server itself is down.</li>
             </ul>
         </div>
-        
+
         <div class="blog-content">
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             

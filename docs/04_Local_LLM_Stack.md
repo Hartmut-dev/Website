@@ -15,7 +15,7 @@ The homelab hosts its own large language models, so prompts and data never leave
 The GTX 1080 has **8GB of VRAM**, which sets the ceiling for model size:
 
 *   An 8B-parameter model at 4-bit quantisation needs roughly 5-6GB, leaving room for the context window.
-*   Models larger than about 9B start spilling into system RAM, which is much slower and competes with other services for the 16GB budget.
+*   Models larger than about 9B start spilling into system RAM, which is much slower and competes with other services for system memory (32GB since Nov 2026, shared with the game server and media stack).
 *   Model weights are stored on the NVMe SSD (`./ollama`) so they load quickly.
 
 ---
