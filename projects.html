@@ -83,7 +83,7 @@
             </ul>
             <h3>Result</h3>
             <div class="result">Network-wide blocking and private recursive DNS, with a deliberately broken DNSSEC test domain correctly rejected.</div>
-            <p>Six real issues were debugged along the way, including Tailscale's masquerade rule hiding every client's address, the router silently handing out <em>itself</em> as a secondary DNS server (a quiet bypass), and a later regression where the server picked up its own Pi-hole through DHCP, caught by the janitor.</p>
+            <p>Seven real issues were debugged along the way, including Tailscale's masquerade rule hiding every client's address, the router silently handing out <em>itself</em> as a secondary DNS server (a quiet bypass), and a later regression where the server picked up its own Pi-hole through DHCP, caught by the janitor. The seventh came from the phone: away from home its tunnel sometimes stalled, and with Pi-hole as the only tailnet nameserver every lookup failed. The query log proved the server was healthy, and a public fallback resolver now covers the gap.</p>
             <div class="tags"><span class="tag">DNS &amp; DNSSEC</span><span class="tag">DHCP</span><span class="tag">Phased rollout</span><span class="tag">Troubleshooting</span><span class="tag">Privacy</span></div>
             <div class="links"><a class="btn" href="docs/13_DNS_Pihole_and_Unbound.md">Full write-up</a></div>
         </article>

@@ -50,7 +50,7 @@ The host firewall (`ufw`) defaults to **deny inbound**, with a short allow-list:
 *   SSH from the home LAN subnet only.
 *   DNS and DHCP for the libvirt VM network.
 
-**DNS:** every LAN and tailnet device uses Pi-hole, except the server itself, which uses public resolvers directly so it never depends on its own container (see [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md)).
+**DNS:** every LAN and tailnet device uses Pi-hole, except the server itself, which uses public resolvers directly so it never depends on its own container. Tailnet devices fall back to Quad9 if they can't reach Pi-hole (see [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md)).
 
 Full details in [10 Host Hardening](10_Host_Hardening.md).
 
