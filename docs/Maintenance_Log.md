@@ -12,7 +12,8 @@ Running notes on updates, fixes, and changes. Newest first.
 *   **Updates:** 72 packages (systemd, containerd, NVIDIA container toolkit 1.20.2, libvirt/qemu) via a self-logging script, then a reboot test: all 9 containers, GPU passthrough, DNS, Tailscale and the playit tunnel came back unattended. Server timezone UTC -> Australia/Perth.
 *   **LLM janitor step 2:** daily digest by qwen3:8b (JSON schema, validated against the script's facts, template fallback). Tested with planted faults + a prompt injection. Fixed a false backup alarm: log timestamps now include the UTC offset.
 *   **LLM janitor steps 3-5:** transition-based alert logic (ntfy staged), hourly config-drift check against an approved baseline, daily log triage with a human-approved noise list.
-*   **Found:** the server was using its own Pi-hole via router DHCP (breaks the "infrastructure doesn't depend on itself" rule). Fix prepared.
+*   **Fixed:** the server was using its own Pi-hole via router DHCP (breaks the "infrastructure doesn't depend on itself" rule). Now ignores DHCP DNS and uses public resolvers directly.
+*   **New service:** ntfy push server (tailnet only, deny-all auth) for janitor alerts. Nightly config snapshot extended to DNS, ntfy and janitor code.
 *   **Investigated:** a manual Crafty backup that "never appeared" was created fine and later rotated out by the 8-zip retention (manual backups count toward it). See [[11_Backup_Strategy]].
 *   **Router:** firmware updated, admin password rotated, remote management and WPS off.
 
