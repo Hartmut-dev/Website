@@ -12,7 +12,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Next (quick networking wins)
 - [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)
 - [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
-- [ ] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model
+- [~] **LLM janitor:** scripts collect health data, local model triages and alerts. No sudo, defended against prompt injection from logs. Commands come from a fixed allowlist, never chosen freely by the model. *Step 1 done 2026-11-14: 22 deterministic checks (disks, SMART, temps, RAM, containers, backups, updates, VPN leak, fail2ban) run hourly; next: daily digest by the local model, then phone alerts*
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
 - [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only; also the media auto-sort fallback: when the name parser isn't confident, proposes show/movie + folder for my approval (torrent names treated as untrusted input; proposes only, never moves files itself)
 - [ ] **Website hardening:** security headers, TLS check
