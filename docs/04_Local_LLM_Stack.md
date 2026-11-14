@@ -85,7 +85,7 @@ nvidia-smi
 ##  Use Cases
 *   **General chat and research** through Open WebUI.
 *   **Retired: HITL Security Agent** - An early experiment where the model ran Lynis audits and proposed fixes. Removed because the model itself decided which commands counted as "read-only", so it could bypass the approval step. Lessons carried into the planned janitor agent.
-*   **Janitor agent (live, Nov 2026):** the model writes the daily health digest and labels unknown log lines, under a validator; it never decides severity or acts. See [[05_LLM_Janitor]].
+*   **Janitor agent (live, Nov 2026):** the model writes the daily health digest and labels unknown log lines, under a validator; it never decides severity or acts. Model jobs go through a queue that waits while Jellyfin uses the GPU. See [[05_LLM_Janitor]].
 
 ---
 
