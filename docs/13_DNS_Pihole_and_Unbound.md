@@ -133,7 +133,7 @@ sudo tailscale serve --bg --tcp 8082 tcp://localhost:8082
 sudo tailscale set --snat-subnet-routes=false
 ```
 
-**Tailscale admin console -> DNS:** add a global nameserver (the homelab's tailnet IP, *not* restricted to a domain), turn on **Override DNS servers**, keep **MagicDNS** on.
+**Tailscale admin console -> DNS:** add a global nameserver (the homelab's tailnet IP, *not* restricted to a domain), turn on **Override DNS servers**, keep **MagicDNS** on. Add **Quad9** as a second global nameserver, listed after Pi-hole, as a fallback (see Troubleshooting 7).
 
 ---
 
@@ -169,6 +169,7 @@ Pi-hole's log confirmed every lookup was `forwarded ... to 172.30.53.2` (Unbound
 4.  **Client names didn't appear after adding records.** Pi-hole caches client names from PTR lookups and refreshes them hourly; a container restart forces it.
 5.  **No sites loaded with a commercial VPN on.** Two VPNs on one machine: the VPN app hijacked routing and DNS, so the Tailscale path to Pi-hole broke. Split tunnelling didn't help (the VPN's DNS leak protection forces its own DNS). Workaround: disconnect Tailscale while the VPN is in use; at home, the LAN path to Pi-hole still applies.
 6.  **The server started using its own Pi-hole.** Phase 2 made the router's DHCP hand out Pi-hole, and the server's network config accepted DHCP DNS too, quietly breaking the "never depend on yourself" rule (`--accept-dns=false` only covers Tailscale). Found a day later by the janitor's log triage (384 resolver fallback messages a day, see [05 LLM Janitor](05_LLM_Janitor.md)). Fixed with the netplan override above. The first attempt failed because netplan requires the same `use-dns` value for DHCPv4 and DHCPv6, so the script now removes its file if `netplan generate` fails, keeping a bad file from breaking the next boot.
+7.  **Photos in messages didn't load on the phone away from home.** Pi-hole's query log showed the phone sent *no* lookups for 25 to 40 minutes at a time, while it kept answering every other client. On networks other than home, the phone's Tailscale tunnel sometimes stalled while iOS still showed the VPN as on. With Pi-hole as the only tailnet nameserver, every new lookup failed. Messages still arrived over Apple's always-open push connection, but photo downloads need fresh lookups. When the tunnel came back, the phone retried about 1,000 queued lookups in one minute, which tripped Pi-hole's per-client rate limit (1,000 per 60 s) and added another 45 seconds of refused queries. Fix: Quad9 as a second global nameserver, so DNS still works when the tunnel stalls. The trade-off is that some lookups can skip ad blocking.
 
 ---
 
@@ -186,6 +187,6 @@ Pi-hole's log confirmed every lookup was `forwarded ... to 172.30.53.2` (Unbound
 ---
 
 ##  Limitations
-*   **Single point of failure:** if the homelab is down, DNS for my devices is down (the internet works, names don't). A second Pi-hole would fix this.
+*   **Single point of failure:** on the LAN, if the homelab is down, DNS for my devices is down (the internet works, names don't). A second Pi-hole would fix this. Tailnet devices now fall back to Quad9.
 *   **Unencrypted upstream:** Unbound's queries to authoritative servers are visible to the ISP. Forwarding over DNS-over-TLS would hide them, at the cost of trusting that provider.
 *   **Apps with hard-coded DNS** (some smart TVs, DNS-over-HTTPS in browsers) can bypass Pi-hole entirely.

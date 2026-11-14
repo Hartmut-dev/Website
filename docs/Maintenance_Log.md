@@ -18,6 +18,8 @@ Running notes on updates, fixes, and changes. Newest first.
 *   **New service:** ntfy push server (tailnet only, deny-all auth) for janitor alerts. Nightly config snapshot extended to DNS, ntfy and janitor code.
 *   **Investigated:** a manual Crafty backup that "never appeared" was created fine and later rotated out by the 8-zip retention (manual backups count toward it). See [11 Backup Strategy](11_Backup_Strategy.md).
 *   **Router:** firmware updated, admin password rotated, remote management and WPS off.
+*   **Fixed:** phone DNS outages away from home. The iOS tunnel stalled for 25 to 40 minutes while Pi-hole was the only tailnet nameserver, so every lookup failed. On reconnect, a retry burst tripped Pi-hole's rate limit. Quad9 added as a second global nameserver. See [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md).
+*   **Website:** inline CSS moved to one shared `style.css` (first step of the redesign).
 
 ### 2026-11-13
 *   **Hardware:** RAM upgraded 16GB -> 32GB (2x16GB DDR4-2666). memtester 12G: all ok; Memtest86+: 2 passes, 0 errors. See [01 Hardware and Storage](01_Hardware_and_Storage.md).
