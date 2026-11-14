@@ -9,6 +9,8 @@ Running notes on updates, fixes, and changes. Newest first.
 *   **Jellyfin:** opened to the LG TV only (ufw), shows added via hard links.
 *   **New service:** Pi-hole + Unbound. DNS for all Tailscale devices, then the home router (DHCP reservation + DHCP DNS). Devices named under `.home.arpa`. See [[13_DNS_Pihole_and_Unbound]].
 *   **Fixed:** Tailscale masquerading hid client IPs (`--snat-subnet-routes=false`); router handed out itself as secondary DNS; desktop had static Google DNS.
+*   **Updates:** 72 packages (systemd, containerd, NVIDIA container toolkit 1.20.2, libvirt/qemu) via a self-logging script, then a reboot test: all 9 containers, GPU passthrough, DNS, Tailscale and the playit tunnel came back unattended. Server timezone UTC -> Australia/Perth.
+*   **Investigated:** a manual Crafty backup that "never appeared" was created fine and later rotated out by the 8-zip retention (manual backups count toward it). See [[11_Backup_Strategy]].
 *   **Router:** firmware updated, admin password rotated, remote management and WPS off.
 
 ### 2026-11-13

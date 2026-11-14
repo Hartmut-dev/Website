@@ -9,7 +9,7 @@ Backups follow a simple rule: **one dead disk must never take out both the data 
 
 ##  Layer 1: Crafty Scheduled Backups
 *   **Schedule:** every 6 hours (Perth time).
-*   **Retention:** newest 8 zips (~2 days).
+*   **Retention:** newest 8 zips (~2 days). Manual "Backup Now" zips count toward the 8, so copy one out if it needs to be kept longer.
 *   **Location:** `~/minecraft-create/crafty/backups/` (NVMe).
 
 ---
