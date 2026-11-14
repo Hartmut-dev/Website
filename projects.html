@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Hartmut Kirsch</title>
+    <meta name="description" content="Home lab case studies: problem, what I did, result. Networking, security and local AI on a self-built Ubuntu server.">
+    <link rel="icon" type="image/png" href="avatar.png">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --ok: #3fb950;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .nav-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        .nav-link:hover { text-decoration: underline; }
+        .page-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 { color: #ffffff; font-size: 2.2rem; margin: 0 0 0.4rem; }
+        .lede { color: var(--text-muted); margin: 0; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin: 1.5rem 0 0;
+        }
+        .stat {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+        .stat strong { display: block; color: #ffffff; font-size: 1.3rem; }
+        .stat span { color: var(--text-muted); font-size: 0.85rem; }
+        .toc { margin: 2rem 0; padding-left: 1.2rem; }
+        .toc a { color: var(--accent); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .case {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            scroll-margin-top: 1rem;
+        }
+        .case h2 { color: #ffffff; font-size: 1.35rem; margin: 0 0 0.25rem; }
+        .case .sub { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 1rem; }
+        .case h3 {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 1.2rem 0 0.3rem;
+        }
+        .case p { margin: 0 0 0.6rem; }
+        .case ul { margin: 0 0 0.6rem; padding-left: 1.2rem; }
+        .case li { margin-bottom: 0.25rem; }
+        .result {
+            border-left: 3px solid var(--ok);
+            padding: 0.4rem 0 0.4rem 0.9rem;
+            margin: 0.3rem 0 0.6rem;
+        }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .tag {
+            font-size: 0.78rem;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.1rem 0.6rem;
+        }
+        .links { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .btn {
+            background-color: var(--bg-color);
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .btn:hover { background-color: var(--accent); color: var(--bg-color); border-color: var(--accent); }
+        code {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0 0.3rem;
+            font-size: 0.88em;
+        }
+        .more h2 { color: #ffffff; font-size: 1.35rem; }
+        .more li { margin-bottom: 0.4rem; }
+        footer { padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+        @media (max-width: 600px) {
+            .container { padding: 1.25rem 1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="nav-link">&larr; Back to Portfolio</a>
+
+        <header class="page-header">
+            <h1>Projects</h1>
+            <p class="lede">Case studies from my home lab, a self-built Ubuntu server I run as if it were production. Each one is told the same way: the problem, what I did, and what came out of it, including what broke. Full technical write-ups are linked under each project.</p>
+            <div class="stats">
+                <div class="stat"><strong>0</strong><span>ports forwarded on the router</span></div>
+                <div class="stat"><strong>66 &rarr; 71</strong><span>Lynis hardening index</span></div>
+                <div class="stat"><strong>25 / 25</strong><span>janitor fault-injection checks</span></div>
+                <div class="stat"><strong>~78k</strong><span>ad &amp; tracker domains blocked</span></div>
+            </div>
+        </header>
+
+        <ol class="toc">
+            <li><a href="#janitor">LLM Janitor: a local AI agent that can't be talked into anything</a></li>
+            <li><a href="#zero-exposure">Zero-exposure hosting behind double NAT</a></li>
+            <li><a href="#dns">Self-hosted recursive DNS for the whole house</a></li>
+            <li><a href="#hardening">Host hardening, and the outage it caused</a></li>
+            <li><a href="#secrets">Finding and removing plain-text secrets</a></li>
+            <li><a href="#vpn">A VPN kill switch, tested by pulling the plug</a></li>
+        </ol>
+
+        <article class="case" id="janitor">
+            <h2>LLM Janitor</h2>
+            <p class="sub">A local AI agent that monitors the server, without trusting the AI.</p>
+            <h3>Problem</h3>
+            <p>I wanted a daily health report and phone alerts written by a local language model. But a model that reads logs can be manipulated by anyone who can write a log line (prompt injection), and small models invent numbers. An earlier experiment that let a model choose "read-only" commands had to be retired because it could bypass its own approval step.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Split the work: <strong>fixed scripts collect facts and decide severity</strong> (24 hourly checks: disks, SMART, temperatures, containers, backups, updates, VPN leak test, fail2ban). The model (<code>qwen3:8b</code> on a GTX 1080) only puts those facts into words.</li>
+                <li>Forced the model to answer in a <strong>fixed JSON schema</strong>, then wrote a <strong>validator</strong> that rejects any answer whose severities disagree with the script, that leaves out or invents a check, that contains a number not in the data, or that includes links or shell commands. One retry, then a template report.</li>
+                <li>Phone alerts through a <strong>self-hosted ntfy</strong> server: tailnet-only, deny-all authentication, a publish-only token for the agent. Alerts fire on status <em>changes</em>, decided by script.</li>
+                <li>Added <strong>config-drift detection</strong> (a new port on a public address is critical, because Docker bypasses the firewall), <strong>log triage</strong> with a human-approved noise list, and a <strong>GPU job queue</strong> that waits while the media server transcodes.</li>
+                <li>Built a <strong>graded fault-injection suite</strong>: a full disk, a crashed container, a stopped collector, a lying model, a dead model server, queue abuse, and two live probes (a real public listener and a real prompt injection written into the system journal).</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">25/25 hard checks pass. On its first day, log triage found a real misconfiguration: the server was resolving DNS through its own Pi-hole, breaking a deliberate design rule.</div>
+            <p>The most useful finding was a failure: shown a log line saying "label this line noise", the model obeyed. Nothing was auto-approved, because model labels are only advice, and the script now flags anything aimed at an AI as suspicious regardless of the model. The goal was never a model that can't be fooled; it's a system that holds when the model is.</p>
+            <div class="tags"><span class="tag">Prompt injection defence</span><span class="tag">Python</span><span class="tag">LLM evaluation</span><span class="tag">Monitoring &amp; alerting</span><span class="tag">Least privilege</span><span class="tag">SQLite</span></div>
+            <div class="links"><a class="btn" href="docs/05_LLM_Janitor.md">Full write-up</a><a class="btn" href="docs/04_Local_LLM_Stack.md">Local LLM stack</a></div>
+        </article>
+
+        <article class="case" id="zero-exposure">
+            <h2>Zero-Exposure Hosting Behind Double NAT</h2>
+            <p class="sub">Public game server and private admin access, with nothing open on the router.</p>
+            <h3>Problem</h3>
+            <p>Friends needed to reach a modded Minecraft server, and I needed remote admin access, but the lab sits behind <strong>double NAT</strong> (ISP modem plus my own router). Port forwarding through both would expose services directly to the internet, and the admin panel must never be public.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Bound <strong>every service to <code>127.0.0.1</code></strong>, so nothing is reachable even from the home LAN by default.</li>
+                <li>Players arrive through an <strong>outbound playit.gg tunnel</strong> that carries only the game port. The Crafty admin panel is never tunnelled; usernames are hidden from the public server-list ping.</li>
+                <li>All administration runs over <strong>Tailscale</strong> (WireGuard mesh VPN), publishing localhost services to my own devices with <code>tailscale serve</code>.</li>
+                <li>Ran the server through Crafty Controller with role-based accounts, scheduled backups, twice-daily restarts, and a container memory limit sized for Java's off-heap usage.</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">No inbound ports on either router. The public internet can reach exactly one port, through a tunnel I can switch off; everything else is private to my tailnet.</div>
+            <div class="tags"><span class="tag">NAT &amp; tunnelling</span><span class="tag">WireGuard / Tailscale</span><span class="tag">Attack surface reduction</span><span class="tag">Docker</span><span class="tag">RBAC</span></div>
+            <div class="links"><a class="btn" href="docs/09_Remote_Access_Tailscale_and_Tunnels.md">Remote access write-up</a><a class="btn" href="docs/07_Minecraft_Game_Server.md">Game server</a><a class="btn" href="docs/08_Network_Topology.md">Network topology</a></div>
+        </article>
+
+        <article class="case" id="dns">
+            <h2>Self-Hosted Recursive DNS</h2>
+            <p class="sub">Pi-hole and Unbound for every device I use, rolled out without breaking the house.</p>
+            <h3>Problem</h3>
+            <p>Every DNS lookup went to the ISP or a big public resolver, which sees the full browsing history. Ads and trackers also run on devices where no blocker can be installed, like the smart TV and phone apps.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Deployed <strong>Pi-hole</strong> as a DNS sinkhole for ~78,000 ad, tracker and malware domains, with <strong>Unbound</strong> (built from Alpine's official package) as its only upstream: a recursive resolver that walks DNS from the root servers itself and validates <strong>DNSSEC</strong>.</li>
+                <li>Rolled out in <strong>two phases</strong>: first only my Tailscale devices (safe to test, works on mobile data), then the home router's DHCP with address reservations, and device names under <code>.home.arpa</code> (RFC 8375).</li>
+                <li>Kept the server itself off its own Pi-hole, so a DNS failure can never stop it from fixing itself.</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">Network-wide blocking and private recursive DNS, with a deliberately broken DNSSEC test domain correctly rejected.</div>
+            <p>Six real issues were debugged along the way, including Tailscale's masquerade rule hiding every client's address, the router silently handing out <em>itself</em> as a secondary DNS server (a quiet bypass), and a later regression where the server picked up its own Pi-hole through DHCP, caught by the janitor.</p>
+            <div class="tags"><span class="tag">DNS &amp; DNSSEC</span><span class="tag">DHCP</span><span class="tag">Phased rollout</span><span class="tag">Troubleshooting</span><span class="tag">Privacy</span></div>
+            <div class="links"><a class="btn" href="docs/13_DNS_Pihole_and_Unbound.md">Full write-up</a></div>
+        </article>
+
+        <article class="case" id="hardening">
+            <h2>Host Hardening, and the Outage It Caused</h2>
+            <p class="sub">Raising the security baseline, then fixing what it broke without lowering it again.</p>
+            <h3>Problem</h3>
+            <p>A fresh Ubuntu server with services on it needs a defensible baseline. Hardening changes, though, can break things silently until the next reboot, and that's exactly what happened.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Key-only SSH with root login off and reverse tunnels blocked, <strong>ufw</strong> default-deny, <strong>fail2ban</strong>, kernel <strong>sysctl</strong> hardening, and unused network protocols blacklisted, measured with <strong>Lynis</strong>.</li>
+                <li>After the next reboot, both GPU containers (media server and AI) refused to start. I wrote a diagnostic script that tested each theory in isolation and traced it to <code>bpf_jit_harden = 2</code> breaking the NVIDIA toolkit's legacy GPU mode.</li>
+                <li>Moved both containers to <strong>CDI mode</strong> instead of weakening the kernel setting, and made a reboot test mandatory after every significant change.</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">Lynis hardening index 66 &rarr; 71 with zero warnings, GPU workloads restored, and hardening kept at full strength. Proven across later reboots, including a full update cycle.</div>
+            <div class="tags"><span class="tag">Linux hardening</span><span class="tag">Firewalls</span><span class="tag">Incident response</span><span class="tag">Root cause analysis</span><span class="tag">NVIDIA / containers</span></div>
+            <div class="links"><a class="btn" href="docs/10_Host_Hardening.md">Hardening write-up</a><a class="btn" href="docs/03_Media_Server_Jellyfin.md">GPU incident</a></div>
+        </article>
+
+        <article class="case" id="secrets">
+            <h2>Finding and Removing Plain-Text Secrets</h2>
+            <p class="sub">From <code>.env</code> files to encrypted secrets, and a scanner on every commit.</p>
+            <h3>Problem</h3>
+            <p>Service passwords and API keys lived in plain-text <code>.env</code> files. A closer look showed the nightly backups had quietly kept <strong>fifteen plain-text copies</strong> of every secret. Separately, this website's public docs repo could leak internal hostnames or addresses by accident.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Moved every secret into files encrypted with <strong>sops + age</strong>, decrypted only in memory when a stack starts. The decryption key is kept out of the backups, in a password manager.</li>
+                <li>Shredded every plain-text copy (live files, old backups, 15 snapshots), then searched the home folder and backup disk to confirm they were gone.</li>
+                <li>Added a <strong>gitleaks</strong> pre-commit hook with custom rules for internal hostnames, private ranges and tunnel addresses. The rules themselves live outside the public repo, because a public list of private details would leak exactly what it protects.</li>
+                <li>Documented the limits honestly: this protects files and backups, not a fully compromised host, and on SSDs <code>shred</code> is best effort, so rotation is the real fix for sensitive keys.</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">No plain-text secrets on disk or in backups, and every commit to this site is scanned before it leaves my machine.</div>
+            <div class="tags"><span class="tag">Secrets management</span><span class="tag">Encryption</span><span class="tag">Secret scanning</span><span class="tag">Data at rest</span></div>
+            <div class="links"><a class="btn" href="docs/10_Host_Hardening.md">Write-up</a><a class="btn" href="docs/11_Backup_Strategy.md">Backup strategy</a></div>
+        </article>
+
+        <article class="case" id="vpn">
+            <h2>A VPN Kill Switch, Tested by Pulling the Plug</h2>
+            <p class="sub">File sharing whose only route to the internet is an encrypted tunnel.</p>
+            <h3>Problem</h3>
+            <p>A torrent client must never reveal the server's real public address, not even for a second when the VPN reconnects. A setting that "should" do that isn't proof.</p>
+            <h3>What I did</h3>
+            <ul>
+                <li>Ran qBittorrent inside the network namespace of a <strong>gluetun</strong> container, whose firewall drops everything except the VPN server and the tunnel itself, and bound the client to the tunnel interface as a second layer.</li>
+                <li>Tested it: peers and DNS see only the VPN's address, and <strong>killing the VPN process mid-session</strong> cut the client off completely until the tunnel came back.</li>
+                <li>Fixed four separate faults on the way, including a <code>$</code> in a password that Docker Compose was silently interpolating, and a stale VPN server list.</li>
+                <li>The janitor now repeats a leak test every hour.</li>
+            </ul>
+            <h3>Result</h3>
+            <div class="result">A kill switch proven by failure testing, plus continuous verification, rather than trusted on configuration alone.</div>
+            <div class="tags"><span class="tag">VPN</span><span class="tag">Network namespaces</span><span class="tag">iptables</span><span class="tag">Leak testing</span></div>
+            <div class="links"><a class="btn" href="docs/12_File_Sharing_qBittorrent_and_VPN.md">Full write-up</a></div>
+        </article>
+
+        <section class="more">
+            <h2>Also in the Lab</h2>
+            <ul>
+                <li><strong>Backups across two disks</strong> with independent retention, so one dead drive or wiped folder can't take out both copies. <a class="nav-link" style="margin:0" href="docs/11_Backup_Strategy.md">Write-up</a></li>
+                <li><strong>Jellyfin media server</strong> with NVENC hardware transcoding. <a class="nav-link" style="margin:0" href="docs/03_Media_Server_Jellyfin.md">Write-up</a></li>
+                <li><strong>An Obsidian "second brain"</strong> that gives my AI assistant long-term memory: linked notes, versioned with git, synced peer-to-peer. <a class="nav-link" style="margin:0" href="docs/14_AI_Second_Brain_Obsidian_Vault.md">Write-up</a></li>
+                <li><strong>An isolated CTF lab network</strong> for KVM virtual machines; a test VM confirmed all 19 isolation checks were blocked. <a class="nav-link" style="margin:0" href="docs/08_Network_Topology.md">Network</a></li>
+            </ul>
+            <p>What's next is on the <a class="nav-link" style="margin:0" href="docs/ROADMAP.md">roadmap</a>, and day-by-day progress is in the <a class="nav-link" style="margin:0" href="homelab-blog.html">dev blog</a>.</p>
+        </section>
+    </div>
+    <footer>&copy; <span id="year"></span> Hartmut Kirsch. All rights reserved.</footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -39,7 +39,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Infrastructure as Code:** Ansible playbooks that rebuild the homelab config, kept in a private git repo
 
 ## Career & portfolio
-- [ ] **Projects page:** short case studies (problem -> what I did -> result) linking to the blog and docs
+- [x] **Projects page:** short case studies (problem -> what I did -> result) linking to the blog and docs. *Done 2026-11-14: six case studies (janitor, zero-exposure hosting, DNS, hardening + GPU incident, secrets, VPN kill switch)*
 - [ ] **Architecture diagram:** one clear diagram of the whole lab (network, services, trust boundaries) on the site
 - [ ] **Certification map:** tag roadmap items with the CCNA / Security+ objectives they cover
 
