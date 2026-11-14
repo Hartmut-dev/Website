@@ -5,6 +5,8 @@ My AI assistant (Claude Code, running on the homelab) doesn't remember anything 
 *   **Format:** plain Markdown + `[[wikilinks]]`, so it opens directly in Obsidian
 *   **Size at creation:** 43 notes
 *   **Backed up:** nightly, as part of the config snapshot (see [[11_Backup_Strategy]])
+*   **Versioned:** a local git repository (no remote), so every edit has history and can be rolled back
+*   **Synced:** to my desktop with Syncthing over Tailscale, opened in Obsidian there
 
 ---
 
@@ -92,7 +94,19 @@ Final result: **43 notes, 0 broken links, 0 orphans, no secrets.**
 
 ---
 
+##  Desktop Sync (Syncthing)
+The vault lives on the server, but I want to browse it in Obsidian on my desktop. **Syncthing** keeps the two folders identical by syncing directly between the machines, with no cloud in between.
+
+*   **Tailnet only:** the server listens only on its Tailscale address; global discovery, LAN announcements, relays and NAT traversal are all off, so it only ever talks to my desktop.
+*   **Paired by device ID:** each side must approve the other before anything syncs.
+*   **Two-way, with history:** edits I make in Obsidian sync back to the server, where git shows them as normal changes. Sync-conflict files are deliberately *not* git-ignored, so they show up in `git status` instead of hiding.
+*   **What stays on the server:** the `.git` folder and Obsidian's per-device layout files (`.stignore`).
+*   Runs as a user service with lingering enabled, so it keeps running without a login session.
+
+**Two gotchas worth recording:** running `sudo sh install.sh | tee log` left `apt-get` *stopped* (not hung) after "Processing triggers", ignoring Ctrl+C, until it got `SIGCONT`; scripts now write their own logs instead. And Syncthing 1.29's `cli` crashed when setting a device address, so that step went through its local REST API instead.
+
+---
+
 ##  Next Steps
-*   **Sync to my desktop** with Syncthing, so I can browse the graph in Obsidian and add my own notes for the assistant to read.
 *   **Agents write to it:** the planned janitor and other local LLM agents will file their reports as linked notes, and the Librarian will answer questions from it. Agents that read this private data will never also read untrusted input *and* take actions.
 *   Separately: self-hosted sync for my personal study vault (Self-hosted LiveSync + CouchDB, works on iPhone).

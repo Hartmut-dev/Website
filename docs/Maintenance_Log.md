@@ -4,7 +4,7 @@ Running notes on updates, fixes, and changes. Newest first.
 ---
 
 ### 2026-11-14
-*   **AI memory:** handover split into an Obsidian vault of 43 linked notes (index, services, devices, decisions, incidents, sessions); checked with fact, inventory, link and secret passes. See [[14_AI_Second_Brain_Obsidian_Vault]].
+*   **AI memory:** handover split into an Obsidian vault of 43 linked notes (index, services, devices, decisions, incidents, sessions); checked with fact, inventory, link and secret passes. Then versioned with git and synced to the desktop with Syncthing (tailnet only, no relays/discovery). See [[14_AI_Second_Brain_Obsidian_Vault]].
 *   **Jellyfin:** opened to the LG TV only (ufw), shows added via hard links.
 *   **New service:** Pi-hole + Unbound. DNS for all Tailscale devices, then the home router (DHCP reservation + DHCP DNS). Devices named under `.home.arpa`. See [[13_DNS_Pihole_and_Unbound]].
 *   **Fixed:** Tailscale masquerading hid client IPs (`--snat-subnet-routes=false`); router handed out itself as secondary DNS; desktop had static Google DNS.

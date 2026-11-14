@@ -17,7 +17,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only; also the media auto-sort fallback: when the name parser isn't confident, proposes show/movie + folder for my approval (torrent names treated as untrusted input; proposes only, never moves files itself)
 - [ ] **Website hardening:** security headers, TLS check
 - [ ] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com
-- [ ] **Self-hosted Obsidian sync + backup:** Self-hosted LiveSync plugin + CouchDB on the homelab over Tailscale (works on iPhone, end-to-end encrypted), replacing the paid Obsidian Sync; vault versioned and included in backups
+- [ ] **Self-hosted Obsidian sync + backup:** Self-hosted LiveSync plugin + CouchDB on the homelab over Tailscale (works on iPhone, end-to-end encrypted), replacing the paid Obsidian Sync; vault versioned and included in backups (the AI vault is already versioned, backed up and Syncthing-synced; this item is for the personal vault)
 - [ ] **Media auto-sort:** qBittorrent finished-hook + categories (tv/movies); guessit name parsing; hard links into tvshows/ or movies/ (folders created as needed), unsure -> unsorted/; Jellyfin rescan via API. Torrent names treated as untrusted input (no shell, no ../ paths)
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
@@ -46,7 +46,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Local AI agents (after the janitor)
 - [ ] **Model bake-off:** eval harness of homelab tasks with checkable answers; compare qwen3:8b vs deepseek-r1:8b (vs DeepSeek V4.1 via API for non-sensitive tasks) on accuracy, speed and VRAM, then assign models per job
 - [ ] **Workhorse loop:** generate -> verify automatically (run tests in a no-network sandbox container) -> feed errors back -> repeat; first job: the Minecraft idle auto-stop script
-- [~] **Second brain (Obsidian):** vault built 2026-11-14 as Claude Code's memory (43 linked notes, verified); next: sync to desktop, agents write to it: they write findings/reports as linked notes, the Librarian answers from it. Private data, so the agents that read it never also read untrusted input and act
+- [~] **Second brain (Obsidian):** vault built 2026-11-14 as Claude Code's memory (43 linked notes, verified); synced to the desktop via Syncthing over Tailscale and versioned with git (2026-11-14); next: agents write to it: they write findings/reports as linked notes, the Librarian answers from it. Private data, so the agents that read it never also read untrusted input and act
 - [ ] **Auditor ("spy"):** read-only agent watching inter-agent messages for prompt injection, out-of-role requests and anomalies; reports only
 - [ ] **Engineer:** designs an open-frame rack on wheels for both towers (homelab + gaming desktop, upright on shelves, desktop lowest) plus a spare shelf and network gear on top: U layout, airflow gaps, widths/depths, desktop cable lengths, router Wi-Fi placement, power/UPS, shopping list; cross-checked by Claude
 
