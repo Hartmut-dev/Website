@@ -50,8 +50,8 @@ tailscale serve status
 ##  playit.gg (Public Game Access)
 Friends without Tailscale connect through **playit.gg**. A small agent container opens an **outbound** tunnel to playit's edge servers; players connect to a public playit address, and the traffic is relayed back down the tunnel to `127.0.0.1:25565`.
 
-*   Runs as the `playit-agent` container alongside Crafty (see [[07_Minecraft_Game_Server]]).
-*   The agent's secret key is stored sops-encrypted (see [[10_Host_Hardening]]), never in the Compose file or the docs.
+*   Runs as the `playit-agent` container alongside Crafty (see [07 Minecraft Game Server](07_Minecraft_Game_Server.md)).
+*   The agent's secret key is stored sops-encrypted (see [10 Host Hardening](10_Host_Hardening.md)), never in the Compose file or the docs.
 *   **Only the game port is tunnelled.** The Crafty admin panel is never exposed through playit.
 
 **Server-side protections for the public port:**

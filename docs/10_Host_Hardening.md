@@ -76,7 +76,7 @@ ignoreip = 127.0.0.1/8 ::1 100.64.0.0/10 <home-lan-subnet>
 *   **BPF:** `unprivileged_bpf_disabled = 1`, `bpf_jit_harden = 2`.
 *   **Filesystem:** `suid_dumpable = 0`, `protected_fifos = 2`, `protected_regular = 2`.
 
-> **Lesson learned:** `bpf_jit_harden = 2` broke the NVIDIA Container Toolkit's legacy GPU mode, which only showed up at the next reboot two weeks later. Fixed by moving GPU containers to CDI mode instead of relaxing the setting. See [[03_Media_Server_Jellyfin]].
+> **Lesson learned:** `bpf_jit_harden = 2` broke the NVIDIA Container Toolkit's legacy GPU mode, which only showed up at the next reboot two weeks later. Fixed by moving GPU containers to CDI mode instead of relaxing the setting. See [03 Media Server Jellyfin](03_Media_Server_Jellyfin.md).
 
 ---
 
@@ -217,6 +217,6 @@ grep hardening_index /var/log/lynis-report.dat
 | Baseline (Oct 2026) | 66 |
 | After round 2 | 71, no warnings |
 
-**Continuous checks:** the janitor compares the host hourly against an approved baseline (listening ports, containers and published ports, services, cron, sysctl values, users, SSH config hashes). A new port on a LAN or public address is critical immediately, since Docker-published ports bypass ufw. See [[05_LLM_Janitor]].
+**Continuous checks:** the janitor compares the host hourly against an approved baseline (listening ports, containers and published ports, services, cron, sysctl values, users, SSH config hashes). A new port on a LAN or public address is critical immediately, since Docker-published ports bypass ufw. See [05 LLM Janitor](05_LLM_Janitor.md).
 
 **Remaining (optional):** auditd, off-site backups, disabling UPnP on both routers.

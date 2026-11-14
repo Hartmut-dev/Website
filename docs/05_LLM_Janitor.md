@@ -1,5 +1,5 @@
 ## LLM Janitor Overview
-The janitor is the homelab's first local AI agent: it watches the server's health, writes a daily report and sends critical alerts to my phone. It is built around one rule: **scripts act, the model only reads and words.** Every decision that matters (is this ok, a warning or critical? should my phone buzz?) is made by fixed code. The local model (`qwen3:8b` on the GTX 1080, see [[04_Local_LLM_Stack]]) only turns facts into short sentences, and a validator checks those sentences against the facts.
+The janitor is the homelab's first local AI agent: it watches the server's health, writes a daily report and sends critical alerts to my phone. It is built around one rule: **scripts act, the model only reads and words.** Every decision that matters (is this ok, a warning or critical? should my phone buzz?) is made by fixed code. The local model (`qwen3:8b` on the GTX 1080, see [04 Local LLM Stack](04_Local_LLM_Stack.md)) only turns facts into short sentences, and a validator checks those sentences against the facts.
 
 *   **Runs as:** a normal user (no sudo). The few checks that need root run from a separate root-owned script.
 *   **Model:** `qwen3:8b` via the local Ollama API, temperature 0, fixed JSON output schema
@@ -91,7 +91,7 @@ Every hour the host is compared with an **approved snapshot**:
 *   login users and members of privileged groups
 *   hashes of the SSH config, authorized keys, fstab, hosts and cron files
 
-A new port listening on a LAN or public address is **critical** straight away, because Docker-published ports bypass ufw (see [[10_Host_Hardening]]). New loopback or tailnet-only listeners, and any other change, are warnings. After an intended change I review the diff and approve a new baseline; the previous one is kept.
+A new port listening on a LAN or public address is **critical** straight away, because Docker-published ports bypass ufw (see [10 Host Hardening](10_Host_Hardening.md)). New loopback or tailnet-only listeners, and any other change, are warnings. After an intended change I review the diff and approve a new baseline; the previous one is kept.
 
 ---
 
@@ -104,7 +104,7 @@ About 2,400 warning lines a day from the systemd journal and every container's l
 4.  **Script-level red flag:** any line that looks aimed at an LLM ("ignore previous instructions", "system prompt") or contains a link or shell pipe is labelled **suspicious** by the script, whatever the model says, and is never proposed as noise.
 5.  **Labels are advice only.** "Noise" labels become *proposals* in a file; nothing joins the noise list unless I copy it there. A log line written by an attacker could otherwise talk the model into hiding it.
 
-**First result:** the triage surfaced the server resolving DNS through its own Pi-hole, breaking a deliberate design rule (see [[13_DNS_Pihole_and_Unbound]]). The model actually labelled it "noise"; the grouping made the 384 repeats stand out. That's the design working as intended: the model's opinion is shown, not obeyed.
+**First result:** the triage surfaced the server resolving DNS through its own Pi-hole, breaking a deliberate design rule (see [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md)). The model actually labelled it "noise"; the grouping made the 384 repeats stand out. That's the design working as intended: the model's opinion is shown, not obeyed.
 
 ---
 
@@ -159,5 +159,5 @@ A suite that plants faults across every step and scores what the janitor catches
 ##  Next Steps
 *   Run the fault suite weekly through the job queue, so regressions show up on their own.
 *   Re-run the suite against other models in the planned model bake-off (does a bigger model resist the injection?).
-*   Reports written as linked notes in the assistant's vault (see [[14_AI_Second_Brain_Obsidian_Vault]]).
+*   Reports written as linked notes in the assistant's vault (see [14 AI Second Brain Obsidian Vault](14_AI_Second_Brain_Obsidian_Vault.md)).
 *   Root-only facts (firewall rules, a few sysctls) added to the drift check via the root collector.

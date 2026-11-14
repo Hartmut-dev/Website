@@ -22,7 +22,7 @@ The homelab currently sits on a flat home network behind **double NAT**. This pa
 
 *   **Port forwarding would need to be configured on both routers**, and is fragile. It is not used at all.
 *   **Inbound connections from the internet don't reach the server by default**, which is a security benefit.
-*   Services that must be public use an **outbound tunnel** instead (see [[09_Remote_Access_Tailscale_and_Tunnels]]).
+*   Services that must be public use an **outbound tunnel** instead (see [09 Remote Access Tailscale and Tunnels](09_Remote_Access_Tailscale_and_Tunnels.md)).
 *   The **powerline link** adds latency and caps throughput compared to a direct Ethernet run.
 
 ---
@@ -50,9 +50,9 @@ The host firewall (`ufw`) defaults to **deny inbound**, with a short allow-list:
 *   SSH from the home LAN subnet only.
 *   DNS and DHCP for the libvirt VM network.
 
-**DNS:** every LAN and tailnet device uses Pi-hole, except the server itself, which uses public resolvers directly so it never depends on its own container (see [[13_DNS_Pihole_and_Unbound]]).
+**DNS:** every LAN and tailnet device uses Pi-hole, except the server itself, which uses public resolvers directly so it never depends on its own container (see [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md)).
 
-Full details in [[10_Host_Hardening]].
+Full details in [10 Host Hardening](10_Host_Hardening.md).
 
 ---
 
@@ -71,4 +71,4 @@ The next major networking project is to replace the flat layout with VLANs behin
 | Guest | Visitor Wi-Fi, internet-only |
 | CTF | Vulnerable lab machines, fully isolated |
 
-Traffic between VLANs will be denied by default and opened per service. See [[ROADMAP]].
+Traffic between VLANs will be denied by default and opened per service. See [ROADMAP](ROADMAP.md).

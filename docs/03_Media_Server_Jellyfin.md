@@ -9,7 +9,7 @@ The homelab runs **Jellyfin**, a free and open-source media server, to stream mo
 ---
 
 ##  Storage Mapping
-Jellyfin's data is split across both drives, following the storage strategy in [[01_Hardware_and_Storage]]:
+Jellyfin's data is split across both drives, following the storage strategy in [01 Hardware and Storage](01_Hardware_and_Storage.md):
 
 ### 1TB NVMe SSD (Fast / Metadata)
 *   `./config` - Server settings, user accounts, and the library database.

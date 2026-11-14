@@ -4,7 +4,7 @@ My AI assistant (Claude Code, running on the homelab) doesn't remember anything 
 *   **Location:** a private folder on the homelab (not published; it contains internal hostnames and addresses)
 *   **Format:** plain Markdown + `[[wikilinks]]`, so it opens directly in Obsidian
 *   **Size at creation:** 43 notes
-*   **Backed up:** nightly, as part of the config snapshot (see [[11_Backup_Strategy]])
+*   **Backed up:** nightly, as part of the config snapshot (see [11 Backup Strategy](11_Backup_Strategy.md))
 *   **Versioned:** a local git repository (no remote), so every edit has history and can be rolled back
 *   **Synced:** to my desktop with Syncthing over Tailscale, opened in Obsidian there
 
@@ -108,5 +108,5 @@ The vault lives on the server, but I want to browse it in Obsidian on my desktop
 ---
 
 ##  Next Steps
-*   **Agents write to it:** the janitor (live since Nov 2026, see [[05_LLM_Janitor]]) currently writes its reports to its own folder; it and later local agents will file them as linked notes, and the Librarian will answer questions from it. Agents that read this private data will never also read untrusted input *and* take actions.
+*   **Agents write to it:** the janitor (live since Nov 2026, see [05 LLM Janitor](05_LLM_Janitor.md)) currently writes its reports to its own folder; it and later local agents will file them as linked notes, and the Librarian will answer questions from it. Agents that read this private data will never also read untrusted input *and* take actions.
 *   Separately: self-hosted sync for my personal study vault (Self-hosted LiveSync + CouchDB, works on iPhone).

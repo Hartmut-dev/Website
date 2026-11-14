@@ -53,7 +53,7 @@ services:
 **Key Settings:**
 *   **`127.0.0.1:` port bindings** - Neither service listens on the LAN. Open WebUI is reached remotely through Tailscale (`tailscale serve`), and the Ollama API is only available to the host itself.
 *   **`OLLAMA_BASE_URL=http://ollama:11434`** - Open WebUI reaches Ollama by container name over the internal Docker network.
-*   **`devices: nvidia.com/gpu=all`** - GPU passed in CDI mode, same as Jellyfin (see [[03_Media_Server_Jellyfin]]).
+*   **`devices: nvidia.com/gpu=all`** - GPU passed in CDI mode, same as Jellyfin (see [03 Media Server Jellyfin](03_Media_Server_Jellyfin.md)).
 
 ---
 
@@ -85,9 +85,9 @@ nvidia-smi
 ##  Use Cases
 *   **General chat and research** through Open WebUI.
 *   **Retired: HITL Security Agent** - An early experiment where the model ran Lynis audits and proposed fixes. Removed because the model itself decided which commands counted as "read-only", so it could bypass the approval step. Lessons carried into the planned janitor agent.
-*   **Janitor agent (live, Nov 2026):** the model writes the daily health digest and labels unknown log lines, under a validator; it never decides severity or acts. Model jobs go through a queue that waits while Jellyfin uses the GPU. See [[05_LLM_Janitor]].
+*   **Janitor agent (live, Nov 2026):** the model writes the daily health digest and labels unknown log lines, under a validator; it never decides severity or acts. Model jobs go through a queue that waits while Jellyfin uses the GPU. See [05 LLM Janitor](05_LLM_Janitor.md).
 
 ---
 
 ##  Known Issues & Fixes
-*   **Ollama container failing to start (Nov 2026) - RESOLVED:** Caused by `bpf_jit_harden = 2` breaking the toolkit's legacy GPU mode. Fixed by switching to CDI mode. Full write-up in [[03_Media_Server_Jellyfin]].
+*   **Ollama container failing to start (Nov 2026) - RESOLVED:** Caused by `bpf_jit_harden = 2` breaking the toolkit's legacy GPU mode. Fixed by switching to CDI mode. Full write-up in [03 Media Server Jellyfin](03_Media_Server_Jellyfin.md).

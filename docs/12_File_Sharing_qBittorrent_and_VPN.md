@@ -76,7 +76,7 @@ services:
           memory: 1G
 ```
 
-**Secrets:** stored in `secrets.enc.env`, encrypted with sops + age, and decrypted in memory at startup (see [[10_Host_Hardening]]):
+**Secrets:** stored in `secrets.enc.env`, encrypted with sops + age, and decrypted in memory at startup (see [10 Host Hardening](10_Host_Hardening.md)):
 ```bash
 ~/homelab/scripts/compose-secrets ~/docker/qbittorrent up -d
 ```

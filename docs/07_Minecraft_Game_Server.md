@@ -4,7 +4,7 @@ The homelab hosts a private, modded Minecraft server for a small group of friend
 *   **Modpack:** Create Ultimate Selection 2 (NeoForge, Minecraft 1.21.1)
 *   **Management:** Crafty Controller 4 (web panel)
 *   **Config Location:** `~/minecraft-create/`
-*   **Public Access:** playit.gg tunnel (see [[09_Remote_Access_Tailscale_and_Tunnels]])
+*   **Public Access:** playit.gg tunnel (see [09 Remote Access Tailscale and Tunnels](09_Remote_Access_Tailscale_and_Tunnels.md))
 *   **Admin Access:** Crafty panel over Tailscale only
 
 ---
@@ -59,7 +59,7 @@ services:
 *   **`127.0.0.1:` port bindings** - Neither the panel nor the game port is reachable from the LAN directly. Access goes through Tailscale or the playit tunnel only.
 *   **`memory: 11G` limit** - Caps the container so a runaway server can't starve the rest of the host.
 *   **`TZ: Australia/Perth`** - Makes Crafty's schedules run on local time.
-*   **Secrets** (tunnel key, API keys, RCON password) are stored encrypted with sops + age and decrypted only in memory at startup. See [[10_Host_Hardening]].
+*   **Secrets** (tunnel key, API keys, RCON password) are stored encrypted with sops + age and decrypted only in memory at startup. See [10 Host Hardening](10_Host_Hardening.md).
 
 ---
 
@@ -68,7 +68,7 @@ Originally the host had 16GB of system RAM shared between Minecraft, Jellyfin, t
 
 *   **Java heap:** 8.5GB (set in Crafty), inside the 11GB container limit to leave room for Java's off-heap memory.
 *   **On-demand running:** The server is stopped when nobody is playing, freeing ~11GB for other work.
-*   **Planned:** An RCON script that checks the player count and stops the server after ~20 minutes empty. See [[ROADMAP]].
+*   **Planned:** An RCON script that checks the player count and stops the server after ~20 minutes empty. See [ROADMAP](ROADMAP.md).
 *   **Done (Nov 2026):** RAM upgraded to 32GB, which removes most of the pressure; idle auto-stop is now a nice-to-have.
 
 ---
@@ -76,7 +76,7 @@ Originally the host had 16GB of system RAM shared between Minecraft, Jellyfin, t
 ##  Schedules
 Configured in the Crafty panel (Perth time):
 
-*   **Backups:** every 6 hours. See [[11_Backup_Strategy]].
+*   **Backups:** every 6 hours. See [11 Backup Strategy](11_Backup_Strategy.md).
 *   **Restarts:** 12am and 12pm, with in-game warnings at 5 minutes and 1 minute.
 *   **Chunk pre-generation (Chunky):** paused before each restart and resumed after, so restarts don't interrupt a half-written chunk.
 
