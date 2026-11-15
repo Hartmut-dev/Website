@@ -24,7 +24,7 @@ ClientAliveInterval 300
 ClientAliveCountMax 2
 ```
 
-*   **Key-only login** (ed25519), no passwords, no root.
+*   **Key-only login** (ed25519), no passwords, no root. One key per device (desktop, phone), so a lost device is revoked by deleting its line from `authorized_keys`. See [09 Remote Access](09_Remote_Access_Tailscale_and_Tunnels.md#working-from-my-phone).
 *   **`AllowTcpForwarding local`** keeps `ssh -L` and VS Code Remote working but blocks reverse tunnels (`-R`).
 *   **`LogLevel VERBOSE`** logs which key was used for each login.
 

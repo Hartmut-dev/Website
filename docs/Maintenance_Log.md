@@ -3,6 +3,9 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ---
 
+### 2026-11-15
+*   **Phone access:** the iPhone got its own ed25519 SSH key (generated on the phone, password login stays off) and connects over Tailscale. Working from the phone: tmux + Claude Code Remote Control + a second window for sudo. See [09 Remote Access](09_Remote_Access_Tailscale_and_Tunnels.md).
+
 ### 2026-11-14
 *   **AI memory:** handover split into an Obsidian vault of 43 linked notes (index, services, devices, decisions, incidents, sessions); checked with fact, inventory, link and secret passes. Then versioned with git and synced to the desktop with Syncthing (tailnet only, no relays/discovery). See [14 AI Second Brain Obsidian Vault](14_AI_Second_Brain_Obsidian_Vault.md).
 *   **LLM janitor step 1:** 22 hourly health checks (disks, SMART, temps, RAM, containers, backups, updates, VPN leak, fail2ban); root checks via a root-owned copy + cron. Baseline 21 ok, 1 warn (pending updates).

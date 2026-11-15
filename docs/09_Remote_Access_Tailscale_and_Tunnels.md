@@ -47,6 +47,20 @@ tailscale serve status
 
 ---
 
+##  Working from My Phone
+SSH on the server is key-only, so the phone has its **own ed25519 key**, generated inside the SSH app (Termius). The private key never leaves the phone; only the public key was added to `~/.ssh/authorized_keys`. A lost phone means deleting one line, and the desktop key keeps working.
+
+SSH is only reachable from the home LAN and the tailnet, so away from home the phone connects over Tailscale.
+
+**Resuming AI-assisted work from the phone:**
+```bash
+tmux new -A -s claude              # attach to the session, or create it
+claude --remote-control            # Claude Code, controllable from the Claude mobile app
+```
+Then I switch to the Claude app and carry on there. iOS suspends the SSH app in the background, which would drop the connection and kill the process; running inside **tmux** keeps it alive on the server. Commands that need `sudo` go in a second tmux window (`Ctrl-b c`) or a second SSH connection, following the usual rule: the assistant writes a reviewed script, I run it, it reads the log. Back at the desktop, `tmux attach -t claude` picks up the same session.
+
+---
+
 ##  playit.gg (Public Game Access)
 Friends without Tailscale connect through **playit.gg**. A small agent container opens an **outbound** tunnel to playit's edge servers; players connect to a public playit address, and the traffic is relayed back down the tunnel to `127.0.0.1:25565`.
 
