@@ -25,7 +25,7 @@ crontab -e
 **What it does:**
 1.  **Safety check:** exits if `/mnt/storage` isn't mounted, so it never fills the root disk by mistake.
 2.  **World copy:** copies the newest Crafty zip, skipping any file modified in the last 10 minutes (Crafty may still be writing it).
-3.  **Config snapshot (daily):** compose files for every stack (game server, AI, media, torrent, DNS, ntfy, Uptime Kuma incl. its database), the **sops-encrypted** secrets files, Crafty's database and settings, the Unbound config, the host scripts, the janitor's code and state, the game-server idle and media-sort scripts, and the AI assistant's notes vault, as a `.tar.gz`. Plain-text tokens (e.g. the ntfy publish token) are deliberately left out. The decryption key is deliberately *not* in the backups; it is stored separately in a password manager.
+3.  **Config snapshot (daily):** compose files for every stack (game server, AI, media, torrent, DNS, ntfy, Uptime Kuma), the **sops-encrypted** secrets files, Crafty's database and settings, the Unbound config, the host scripts, the janitor's code and state, the game-server idle and media-sort scripts, and the AI assistant's notes vault, as a `.tar.gz`. Plain-text tokens (e.g. the ntfy publish token) are deliberately left out. The decryption key is deliberately *not* in the backups; it is stored separately in a password manager.
 4.  **Independent retention:** prunes on its own schedule, so a wiped Crafty folder doesn't wipe the copies too.
 
 **Key Snippets:**

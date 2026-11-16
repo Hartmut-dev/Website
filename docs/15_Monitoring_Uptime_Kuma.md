@@ -54,4 +54,4 @@ Kuma runs on the box it watches: if the whole server goes down, nothing is left 
 ---
 
 ##  Backups
-`docker-compose.yml` and the `data/` folder (SQLite database incl. WAL) are part of the daily config snapshot. See [11 Backup Strategy](11_Backup_Strategy.md).
+Only `docker-compose.yml` is in the daily config snapshot. The database is deliberately left out: it holds the ntfy token and the admin password hash, and the backups never contain plain-text tokens. The monitor list above is short enough to recreate. See [11 Backup Strategy](11_Backup_Strategy.md).
