@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Hartmut Kirsch | IT & Cyber Security</title>
     <link rel="icon" type="image/png" href="avatar.png">
     <link rel="stylesheet" href="style.css">
@@ -20,8 +22,8 @@
         
         <div class="links-container">
             <a href="projects.html" class="btn">Projects</a>
-            <a href="https://github.com/hartmut-dev" class="btn" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/hartmut-kirsch-45b156412/" class="btn" target="_blank">LinkedIn</a>
+            <a href="https://github.com/hartmut-dev" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/hartmut-kirsch-45b156412/" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="mailto:contact@hartmutk.dev" class="btn">Email Me</a>
         </div>
         <p class="contact-note">Currently seeking an IT or Cyber Security internship or entry-level role. Please feel free to reach out via email or LinkedIn to request my full resume.</p>
@@ -55,9 +57,6 @@
         &copy; <span id="year"></span> Hartmut Kirsch. All rights reserved.
     </footer>
 
-    <script>
-        // Automatically update the copyright year
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <script src="site.js"></script>
 </body>
 </html>
