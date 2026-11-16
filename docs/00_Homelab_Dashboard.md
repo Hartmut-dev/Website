@@ -21,6 +21,7 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 ##  Backups & Maintenance 
 - [11 Backup Strategy](11_Backup_Strategy.md) - Crafty backups, NVMe to HDD copies, and retention policy.
 - [05 LLM Janitor](05_LLM_Janitor.md) - Monitoring and alerting (see above).
+- [15 Monitoring Uptime Kuma](15_Monitoring_Uptime_Kuma.md) - Per-service uptime checks every 60 s, DNS and certificate checks, alerts via ntfy.
 - [Maintenance Log](Maintenance_Log.md) - Running notes on updates, bug fixes, and changes.
 ##  AI & Knowledge 
 - [14 AI Second Brain Obsidian Vault](14_AI_Second_Brain_Obsidian_Vault.md) - Obsidian vault of linked notes as the AI assistant's long-term memory: structure, session workflow, verification.

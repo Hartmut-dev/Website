@@ -194,7 +194,9 @@ fi
 exec "$GL" git --pre-commit --staged --redact --no-banner --config "$CFG" .
 ```
 
-**4. Verification:**
+**4. GitHub Action (covers edits made on github.com):** the local hook can't see commits made in the browser, so `.github/workflows/secret-scan.yml` runs the same gitleaks version on every push and pull request, over the full history. The binary is checksum-pinned and `actions/checkout` is pinned to a commit SHA, the job has read-only permissions, and the private rules come from a repository secret (`GITLEAKS_CONFIG_TOML`) instead of the public repo; without the secret it falls back to the built-in rules with a warning. It is detection, not prevention: when it fails, the commit is already public, so the response is to rotate the secret and rewrite history.
+
+**5. Verification:**
 ```bash
 # Full history scan
 gitleaks git --config ~/.config/gitleaks/homelab.toml .

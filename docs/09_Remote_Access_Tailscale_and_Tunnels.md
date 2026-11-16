@@ -34,6 +34,7 @@ sudo tailscale serve --bg --tcp 8443 tcp://localhost:8443    # Crafty panel
 sudo tailscale serve --bg --tcp 3000 tcp://localhost:3000    # Open WebUI
 sudo tailscale serve --bg --tcp 25565 tcp://localhost:25565  # Minecraft (tailnet players)
 sudo tailscale serve --bg --tcp 8090 tcp://127.0.0.1:8090    # ntfy push server (janitor alerts)
+sudo tailscale serve --bg --tcp 3001 tcp://127.0.0.1:3001    # Uptime Kuma status dashboard
 ```
 
 Plain TCP forwards are fine here because tailnet traffic is already WireGuard-encrypted (Tailscale HTTPS certificates are not enabled on this tailnet). The snap package's wrapper already passes `--socket`, so don't add it again.

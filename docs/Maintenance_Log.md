@@ -8,6 +8,11 @@ Running notes on updates, fixes, and changes. Newest first.
 *   **gluetun control server:** API-key auth on every route (key in sops); janitor VPN check updated to send it from inside the container. Fixes a "route unprotected" warning from log triage. See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md).
 *   **Investigated:** systemd-resolved switching UDP/TCP for one public resolver about 190 times an hour for ten hours; DNS kept working (one failed snap refresh). Watching; recheck after the double-NAT removal.
 
+*   **New service: Uptime Kuma.** 12 monitors (web UIs, health endpoints, three DNS resolvers, website + certificate), alerts to ntfy with its own token; tailnet only. See [15 Monitoring Uptime Kuma](15_Monitoring_Uptime_Kuma.md).
+*   **Media auto-sort:** host-side cron hard-links finished downloads into tvshows/movies; unsure names are left alone with a push. See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md#media-auto-sort).
+*   **Website hardening:** TLS reviewed; CSP + referrer policy meta tags, inline scripts moved to `site.js`, `rel="noopener"` on external links.
+*   **GitHub Action secret scan:** gitleaks on every push incl. github.com edits, pinned and checksum-verified. See [10 Host Hardening](10_Host_Hardening.md).
+
 ### 2026-11-15
 *   **Phone access:** the iPhone got its own ed25519 SSH key (generated on the phone, password login stays off) and connects over Tailscale. Working from the phone: tmux + Claude Code Remote Control + a second window for sudo. See [09 Remote Access](09_Remote_Access_Tailscale_and_Tunnels.md).
 

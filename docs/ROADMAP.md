@@ -13,14 +13,14 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Next (quick networking wins)
 - [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)
-- [ ] **Monitoring:** Uptime Kuma, then Prometheus + Grafana (SNMP)
+- [~] **Monitoring:** Uptime Kuma *(done 2026-11-16: 12 monitors, ntfy alerts, see [15 Monitoring Uptime Kuma](15_Monitoring_Uptime_Kuma.md))*, then Prometheus + Grafana (SNMP)
 - [x] **LLM janitor:** scripts collect health data, local model words and triages, alerts go to my phone. No sudo, defended against prompt injection from logs; the model never decides severity or acts. *Done 2026-11-14, all 7 steps: hourly checks, validated daily digest, ntfy alerts, config drift, log triage, GPU job queue, graded fault-injection suite (25/25). See [05 LLM Janitor](05_LLM_Janitor.md)*
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
 - [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only; also the media auto-sort fallback: when the name parser isn't confident, proposes show/movie + folder for my approval (torrent names treated as untrusted input; proposes only, never moves files itself)
-- [ ] **Website hardening:** security headers, TLS check
-- [ ] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com
+- [x] **Website hardening:** TLS check (1.2/1.3 only, `.dev` HSTS-preloaded), CSP + referrer policy as meta tags (GitHub Pages can't send headers), inline scripts moved out. Clickjacking protection would need a proxy such as Cloudflare
+- [x] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com (private rules via a repo secret)
 - [ ] **Self-hosted Obsidian sync + backup:** Self-hosted LiveSync plugin + CouchDB on the homelab over Tailscale (works on iPhone, end-to-end encrypted), replacing the paid Obsidian Sync; vault versioned and included in backups (the AI vault is already versioned, backed up and Syncthing-synced; this item is for the personal vault)
-- [ ] **Media auto-sort:** qBittorrent finished-hook + categories (tv/movies); guessit name parsing; hard links into tvshows/ or movies/ (folders created as needed), unsure -> unsorted/; Jellyfin rescan via API. Torrent names treated as untrusted input (no shell, no ../ paths)
+- [x] **Media auto-sort:** host-side cron instead of a qBittorrent hook; strict own parser instead of guessit; hard links into tvshows/ or movies/; unsure -> left alone + phone push; Jellyfin real-time monitor instead of an API rescan. Torrent names treated as untrusted input (no shell, no ../ paths). See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md#media-auto-sort)
 - [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
 ## Networking projects (committed)

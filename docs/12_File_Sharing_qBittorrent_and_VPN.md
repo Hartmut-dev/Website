@@ -191,6 +191,17 @@ docker compose pull && ~/homelab/scripts/compose-secrets ~/docker/qbittorrent up
 
 ---
 
+##  Media Auto-Sort
+Finished downloads are sorted into the Jellyfin library by a small host-side script (cron, every 10 minutes), without touching qBittorrent:
+
+*   **How it knows a torrent is finished:** qBittorrent downloads into `incomplete/` and moves a torrent up to `downloads/` only when it's complete, as an atomic rename on the same disk. So every top-level entry in `downloads/` is finished, and no API or qBittorrent hook is needed.
+*   **Hard links, not copies or moves:** each file is linked into `tvshows/<Show> (<Year>)/Season <N>/` or `movies/<Title> (<Year>)/`. qBittorrent keeps seeding the original name, the library gets a clean one, and no extra disk space is used. Jellyfin's real-time library monitor picks the new files up.
+*   **Why not a qBittorrent "run on finish" hook:** that would run inside the most exposed container and need write access to the whole media library. The host-side script keeps the torrent client's access unchanged.
+*   **Torrent names are untrusted input:** a strict parser (episode markers like `S01E02`/`1x02`, the last plausible year before release tags such as `1080p`), no shell, only `os.link` (never overwrites, moves or deletes), sanitised names, every destination checked to stay inside the library, symlinks and non-media files ignored, samples skipped. Tested with path-escape names, a symlink to `/etc/passwd`, and titles containing numbers ("Blade Runner 2049 (2017)", "1917 (2019)").
+*   **When unsure, do nothing:** multi-file releases without episode numbers, movies without a year, or mixed content are left alone, with a "needs manual sort" push via ntfy. A local-LLM "Librarian" that *proposes* a folder for approval is on the [ROADMAP](ROADMAP.md).
+
+---
+
 ##  Limitations & Privacy Notes
 *   **Not connectable:** Double NAT plus no VPN port forwarding means peers can't connect *in*. Transfers work when the other side is connectable. Fix options: the VPN provider's port-forwarding add-on, or forwarding through both home routers.
 *   **A VPN moves trust, it doesn't remove it.** The provider can see what the ISP used to. It hides the IP from swarms; it is not anonymity.
