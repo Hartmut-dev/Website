@@ -45,7 +45,7 @@ It also avoids the "lethal trifecta": no single agent combines untrusted input, 
 *   **Containers:** every expected container running, health status, restart count (a missing container is critical)
 *   **Backups:** hourly copy ran, newest world backup age, today's config snapshot exists
 *   **Updates:** pending packages, security updates, reboot required
-*   **VPN leak test:** the torrent client's public IP must differ from the server's (IPs are compared, never stored)
+*   **VPN leak test:** the torrent client's public IP must differ from the server's (IPs are compared, never stored). gluetun's control API needs a key; the request runs inside the container so the janitor never holds it
 *   **fail2ban** bans (root part)
 *   **Config drift** (step 4)
 

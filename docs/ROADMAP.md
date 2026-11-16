@@ -9,7 +9,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Folder cleanup:** scripts/logs/archive layout, leftovers quarantined (configs under git -> see Infrastructure as Code)
 - [ ] **Remove the double NAT:** ISP modem into bridge mode so my router holds the public IP; may fix "not connectable" for torrents (first attempt at setup didn't work, so diagnosing why comes first)
 - [ ] **Portfolio:** architecture diagram + certification map (see Career & portfolio below)
-- [ ] **Minecraft idle auto-stop:** check player count over RCON, stop after ~20 min empty, start on demand from Crafty
+- [x] **Minecraft idle auto-stop:** Crafty API (not RCON) checks players every 5 min, stops after 20 min empty, restarts only if running; start on demand from Crafty
 
 ## Next (quick networking wins)
 - [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)

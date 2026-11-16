@@ -22,6 +22,7 @@ The homelab runs **qBittorrent** for sharing large files with friends. All torre
 *   **Kill switch** - gluetun's firewall drops all outbound traffic except loopback, established connections, the VPN server itself, and the `tun0` tunnel. If the tunnel drops, nothing matches, and traffic stops.
 *   **Second layer** - qBittorrent is also bound to the `tun0` interface in its own settings.
 *   **Startup order** - qBittorrent only starts once gluetun reports *healthy*.
+*   **Control server locked down (Nov 2026)** - gluetun's HTTP control server (port 8000) is only reachable inside the shared network namespace, which includes qBittorrent. Every route now needs an API key (`HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE`, key from the sops secrets file), so a compromised torrent client can't query or change the VPN. Requests without the key get `401`. The janitor's VPN leak check runs `wget` *inside* gluetun with the key expanded there, so the janitor never holds it. This also removes a deprecation warning: unauthenticated routes stop working in a future gluetun release.
 
 ---
 
