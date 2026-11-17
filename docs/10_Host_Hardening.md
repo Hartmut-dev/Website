@@ -2,7 +2,8 @@
 The host was hardened in two rounds, each written as a re-runnable shell script. Every change is a separate drop-in file, so any single change can be undone by deleting that file.
 
 *   **Scripts:** `~/homelab/scripts/harden-root.sh` and `~/homelab/scripts/harden-root-2.sh`
-*   **Result:** Lynis hardening index **66 -> 71**, zero warnings.
+*   **Follow-up (Nov 2026):** `~/homelab/scripts/sysctl-regression-fix.sh` and `~/homelab/scripts/lynis-hardening-round2.sh`, see [Lynis follow-up](#lynis-follow-up-nov-2026).
+*   **Result:** Lynis hardening index **66 -> 71 -> 74**, zero warnings.
 
 ---
 
@@ -218,7 +219,32 @@ grep hardening_index /var/log/lynis-report.dat
 |---|---|
 | Baseline (Oct 2026) | 66 |
 | After round 2 | 71, no warnings |
+| Re-check after a reboot (Nov 2026) | 70: two sysctls had silently reverted |
+| After the regression fix | 71 |
+| After the follow-up round | 74, no warnings |
+
+##  Lynis follow-up (Nov 2026)
+**A regression the baseline missed.** A re-scan scored 70, one point lower than before. Two hardening values were back to their defaults, even though `/etc/sysctl.d/90-hardening.conf` still set them correctly:
+*   `log_martians` was back to 0. On every boot, ufw re-applies its own `/etc/ufw/sysctl.conf` after the system's sysctl files, and that file sets `log_martians=0`.
+*   `fs.suid_dumpable` was back to 2. The crash reporter **apport** sets it every time it starts.
+
+A reboot two days earlier had triggered both. The janitor's drift check missed it because its baseline was approved *after* that reboot, so the wrong values became the baseline. Fixes: `log_martians=1` in ufw's own file (no firewall reload needed), apport disabled, and a new drift check that compares the **running** value of every hardening sysctl with the value **written in the config file**, so this kind of regression is caught however the baseline was taken.
+
+**Follow-up round:** all of it is safe to apply over SSH, because nothing touches SSH, ufw or the network.
+
+| Change | Why |
+|---|---|
+| **auditd** + 24 watch rules | Kernel-level record of changes to users and passwords, sudoers, SSH config and keys, cron, systemd units, ufw, sysctl, Docker, fail2ban and PAM, plus sudo use and kernel module loads. Search with `ausearch -k <key> -i`. No exec-everything rule, which would be too noisy with Docker. |
+| **debsums** | Checks installed files against package checksums. Baseline: 0 changed files. |
+| **libpam-tmpdir** | A private `$TMPDIR` per user instead of the shared `/tmp`. |
+| **apt-listchanges**, **apt-show-versions** | Important package NEWS shown on upgrade (text only, never prompts); per-package version overview. |
+| fail2ban `jail.local` | A stub file. The real settings live in `jail.d/`, which package updates never overwrite. |
+| `login.defs`: `UMASK 027`, SHA-crypt rounds | New files are no longer readable by other users. Only affects new files and new passwords. |
+| Purged leftover configs | Six old kernel packages were removed but still had configuration files on disk. |
+
+**Gotcha:** the first run froze at the very end of `apt-get install`: the process was *stopped* (state `T`), not busy. The cause is unclear, though the terminal is the likely suspect. Killing it ended the whole script, but dpkg had already finished, so nothing was half-installed, and the re-runnable script just carried on. Package tools in scripts now get `</dev/null`, so they can never wait on the terminal.
+
 
 **Continuous checks:** the janitor compares the host hourly against an approved baseline (listening ports, containers and published ports, services, cron, sysctl values, users, SSH config hashes). A new port on a LAN or public address is critical immediately, since Docker-published ports bypass ufw. See [05 LLM Janitor](05_LLM_Janitor.md).
 
-**Remaining (optional):** auditd, off-site backups, disabling UPnP on both routers.
+**Remaining (optional):** scheduled debsums checks via the janitor, off-site backups, disabling UPnP on both routers, SSH session limits (needs testing on site).
