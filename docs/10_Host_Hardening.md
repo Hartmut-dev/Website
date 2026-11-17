@@ -2,8 +2,8 @@
 The host was hardened in two rounds, each written as a re-runnable shell script. Every change is a separate drop-in file, so any single change can be undone by deleting that file.
 
 *   **Scripts:** `~/homelab/scripts/harden-root.sh` and `~/homelab/scripts/harden-root-2.sh`
-*   **Follow-up (Nov 2026):** `~/homelab/scripts/sysctl-regression-fix.sh` and `~/homelab/scripts/lynis-hardening-round2.sh`, see [Lynis follow-up](#lynis-follow-up-nov-2026).
-*   **Result:** Lynis hardening index **66 -> 71 -> 74**, zero warnings.
+*   **Follow-up (Nov 2026):** `~/homelab/scripts/sysctl-regression-fix.sh` and `~/homelab/scripts/lynis-hardening-round2.sh`, `lynis-hardening-round3.sh` and `rkhunter-tune.sh`, see [Lynis follow-up](#lynis-follow-up-nov-2026).
+*   **Result:** Lynis hardening index **66 -> 71 -> 78**, zero warnings.
 
 ---
 
@@ -222,6 +222,7 @@ grep hardening_index /var/log/lynis-report.dat
 | Re-check after a reboot (Nov 2026) | 70: two sysctls had silently reverted |
 | After the regression fix | 71 |
 | After the follow-up round | 74, no warnings |
+| After the "points" round | **78**, no warnings |
 
 ##  Lynis follow-up (Nov 2026)
 **A regression the baseline missed.** A re-scan scored 70, one point lower than before. Two hardening values were back to their defaults, even though `/etc/sysctl.d/90-hardening.conf` still set them correctly:
@@ -242,9 +243,23 @@ A reboot two days earlier had triggered both. The janitor's drift check missed i
 | `login.defs`: `UMASK 027`, SHA-crypt rounds | New files are no longer readable by other users. Only affects new files and new passwords. |
 | Purged leftover configs | Six old kernel packages were removed but still had configuration files on disk. |
 
+**"Points" round:** each item was picked on purpose, and the ones that would cost more than they give were skipped.
+
+| Change | Notes |
+|---|---|
+| Legal banner (`/etc/issue`, `/etc/issue.net`) | Local console only. sshd has no `Banner` line, so SSH logins are unchanged. |
+| **rkhunter** | No daily cron or mail of its own. `PKGMGR=DPKG` checks files against dpkg's hashes, and `APT_AUTOGEN` refreshes the baseline after every apt run, so updates don't cause alarms. The first scan raised 5 warnings, all false alarms. 2 SSH options rkhunter can't see in the `sshd_config.d/` drop-in were confirmed with `sshd -T`, and 2 known hidden files were whitelisted. The fifth was an ephemeral client port that happened to be on rkhunter's backdoor list; it is deliberately not whitelisted. |
+| **Weekly integrity scan** | `/usr/local/sbin/janitor-integrity` (root, Sundays) runs debsums and rkhunter and writes the results to `/var/lib/janitor/`. The janitor turns any finding, or a scan older than 8 days, into a warning on the phone. A scan whose output nobody reads is just a point on a scorecard. |
+| Process accounting (`acct`) | A record of which commands ran, for forensics. |
+| `libpam-pwquality` | Password strength rules, only applied when a password is changed. |
+| USB storage blocked | `usb-storage` and `uas` are blacklisted with `install … /bin/false`. Keyboards still work. To undo, delete `/etc/modprobe.d/blacklist-usb-storage.conf`. |
+| Lynis exceptions (`/etc/lynis/custom.prf`) | Three sysctls the server **needs**: IP forwarding (Docker, Tailscale subnet router), `rp_filter=2` (strict mode drops asymmetric Tailscale/Docker traffic) and module loading (NVIDIA, WireGuard). The values themselves are unchanged and the reasons are written in the file. This is bookkeeping, not extra security, and it is worth about a point. |
+
+**Skipped on purpose:** restricting compilers to root (pip builds would break), SSH session and forwarding limits (they would break tunnels and VS Code Remote), separate `/home` and `/var` partitions (needs a reinstall), a GRUB password (physical access only, risky to set), forced password expiry (outdated advice; SSH is key-only anyway), and AIDE (debsums and rkhunter already cover file integrity at a fraction of the noise). Remote logging waits for the Raspberry Pi.
+
 **Gotcha:** the first run froze at the very end of `apt-get install`: the process was *stopped* (state `T`), not busy. The cause is unclear, though the terminal is the likely suspect. Killing it ended the whole script, but dpkg had already finished, so nothing was half-installed, and the re-runnable script just carried on. Package tools in scripts now get `</dev/null`, so they can never wait on the terminal.
 
 
 **Continuous checks:** the janitor compares the host hourly against an approved baseline (listening ports, containers and published ports, services, cron, sysctl values, users, SSH config hashes). A new port on a LAN or public address is critical immediately, since Docker-published ports bypass ufw. See [05 LLM Janitor](05_LLM_Janitor.md).
 
-**Remaining (optional):** scheduled debsums checks via the janitor, off-site backups, disabling UPnP on both routers, SSH session limits (needs testing on site).
+**Remaining (optional):** remote logging to the Raspberry Pi, off-site backups, disabling UPnP on both routers.
