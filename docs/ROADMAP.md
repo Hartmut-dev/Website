@@ -7,7 +7,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Docs pipeline:** GitHub deploy key on the homelab, Claude edits and pushes docs on request, secret scanning before every commit
 - [ ] **Daily GitHub activity:** one real, small piece of work each day (log entry, script, doc, fix). No fake commit generators
 - [x] **Folder cleanup:** scripts/logs/archive layout, leftovers quarantined (configs under git -> see Infrastructure as Code)
-- [ ] **Remove the double NAT:** ISP modem into bridge mode so my router holds the public IP; may fix "not connectable" for torrents (first attempt at setup didn't work, so diagnosing why comes first)
+- [~] **Remove the double NAT:** *investigated 2026-11-17, kept on purpose for now.* The ISP modem also serves the rest of the house, so bypassing it or turning my router into an access point would make things worse for everyone, and today the double NAT costs nothing (no port forwards needed, Tailscale reports an "easy" NAT). The real fix comes with **wired backhaul**: two Cat6 runs to my office, then one router I control at the edge, the ISP modem as a Wi-Fi access point, and the lab separated from the family network
 - [ ] **Portfolio:** architecture diagram + certification map (see Career & portfolio below)
 - [x] **Minecraft idle auto-stop:** Crafty API (not RCON) checks players every 5 min, stops after 20 min empty, restarts only if running; start on demand from Crafty
 
