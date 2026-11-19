@@ -102,6 +102,10 @@ server:
     private-address: 100.64.0.0/10
     prefetch: yes
     serve-expired: yes
+    serve-expired-client-timeout: 0            # answer stale at once, refresh in background (Troubleshooting 8)
+    serve-expired-ttl: 86400
+    msg-cache-size: 16m                        # defaults are 4m; fits the 128M container limit
+    rrset-cache-size: 32m
 ```
 
 ---
@@ -170,6 +174,7 @@ Pi-hole's log confirmed every lookup was `forwarded ... to 172.30.53.2` (Unbound
 5.  **No sites loaded with a commercial VPN on.** Two VPNs on one machine: the VPN app hijacked routing and DNS, so the Tailscale path to Pi-hole broke. Split tunnelling didn't help (the VPN's DNS leak protection forces its own DNS). Workaround: disconnect Tailscale while the VPN is in use; at home, the LAN path to Pi-hole still applies.
 6.  **The server started using its own Pi-hole.** Phase 2 made the router's DHCP hand out Pi-hole, and the server's network config accepted DHCP DNS too, quietly breaking the "never depend on yourself" rule (`--accept-dns=false` only covers Tailscale). Found a day later by the janitor's log triage (384 resolver fallback messages a day, see [05 LLM Janitor](05_LLM_Janitor.md)). Fixed with the netplan override above. The first attempt failed because netplan requires the same `use-dns` value for DHCPv4 and DHCPv6, so the script now removes its file if `netplan generate` fails, keeping a bad file from breaking the next boot.
 7.  **Photos in messages didn't load on the phone away from home.** Pi-hole's query log showed the phone sent *no* lookups for 25 to 40 minutes at a time, while it kept answering every other client. On networks other than home, the phone's Tailscale tunnel sometimes stalled while iOS still showed the VPN as on. With Pi-hole as the only tailnet nameserver, every new lookup failed. Messages still arrived over Apple's always-open push connection, but photo downloads need fresh lookups. When the tunnel came back, the phone retried about 1,000 queued lookups in one minute, which tripped Pi-hole's per-client rate limit (1,000 per 60 s) and added another 45 seconds of refused queries. Fix: Quad9 as a second global nameserver, so DNS still works when the tunnel stalls. The trade-off is that some lookups can skip ad blocking.
+8.  **Browsing felt laggy on the desktop.** Pi-hole's query log showed 173 of the desktop's 10,000 lookups in a day took over a second, and the slowest stopped at almost exactly 1.8 s. Since version 1.22, Unbound's `serve-expired-client-timeout` defaults to 1800 ms: when a cached record has expired, it waits up to 1.8 s for a fresh answer before falling back to the stale one. Popular sites took 200 to 1,860 ms through Pi-hole against 20 to 60 ms through a public resolver. Set it to `0` (serve stale at once, refresh in the background, the pre-1.22 behaviour) and raised the caches from 4 MB to 16/32 MB.
 
 ---
 

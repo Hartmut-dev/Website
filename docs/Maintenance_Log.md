@@ -3,6 +3,9 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ---
 
+### 2026-11-19
+*   **DNS lag fixed:** about 1 in 60 lookups from the desktop stalled for up to 1.8 s. Cause: Unbound's newer default `serve-expired-client-timeout: 1800` waits for a fresh answer before serving an expired cached one. Set it to 0 and enlarged the caches. Server load, bandwidth, packet loss and LAN latency all checked and fine. See [13 DNS](13_DNS_Pihole_and_Unbound.md).
+
 ### 2026-11-17
 *   **Lynis 70 -> 74:** fixed two hardening sysctls that had silently reverted at boot (ufw's own sysctl file, apport). The drift check now compares running sysctl values with the configured ones, not just with the baseline. Follow-up round: auditd with 24 rules, debsums (0 changed files), libpam-tmpdir, apt-listchanges and apt-show-versions, fail2ban `jail.local`, `UMASK 027`, six leftover kernel configs purged. See [10 Host Hardening](10_Host_Hardening.md#lynis-follow-up-nov-2026).
 *   **Lynis 74 -> 78:** rkhunter (5 first-scan false positives handled), weekly debsums and rkhunter scans read by the janitor, process accounting, pwquality, USB storage blocked, legal banner, three documented sysctl exceptions. Skipped compiler restriction and SSH limits on purpose.
