@@ -35,7 +35,7 @@ services:
 | Monitor | Check |
 |---|---|
 | Jellyfin, Open WebUI, ntfy, Syncthing | HTTP health endpoints |
-| Ollama, qBittorrent web UI, Pi-hole web UI, Crafty panel | HTTP 200-399 (Crafty's self-signed cert ignored on localhost) |
+| Ollama, Pi-hole web UI, Crafty panel | HTTP 200-399 (Crafty's self-signed cert ignored on localhost) |
 | DNS: Pi-hole (LAN), Pi-hole (tailnet), Unbound (internal) | a real DNS lookup against each resolver |
 | Website | HTTPS every 5 minutes, plus certificate-expiry warnings |
 

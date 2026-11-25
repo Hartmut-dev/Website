@@ -34,7 +34,7 @@ now.md          current state, next session plan, reminders and dates
 rules.md        how the assistant must work (no sudo, ask before restarts, never print secrets, push only on request)
 user.md         who I am, goals, preferences
 host/           server hardware/OS/layout, hardening, network (incl. device IP map)
-services/       one note per service: minecraft, jellyfin, pihole-unbound, qbittorrent-gluetun, tailscale, backups, ...
+services/       one note per service: minecraft, jellyfin, pihole-unbound, tailscale, backups, ...
 devices/        router, desktop, TV, phone
 decisions/      why things are the way they are (e.g. CDI mode over weakening kernel hardening)
 incidents/      what broke and how it was fixed

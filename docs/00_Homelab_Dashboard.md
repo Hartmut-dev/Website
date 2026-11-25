@@ -11,7 +11,6 @@ This server utilizes a dual-hypervisor approach, balancing containerized infrast
 - [04 Local LLM Stack](04_Local_LLM_Stack.md) - Ollama, Open WebUI, and `qwen3:8b` configurations. 
 - [05 LLM Janitor](05_LLM_Janitor.md) - Local AI health agent: hourly checks, validated daily digest, config drift, log triage, and phone alerts via self-hosted ntfy.
 - [07 Minecraft Game Server](07_Minecraft_Game_Server.md) - Crafty Controller, modpack management, schedules, and memory limits.
-- [12 File Sharing qBittorrent and VPN](12_File_Sharing_qBittorrent_and_VPN.md) - qBittorrent behind a gluetun VPN kill switch, leak tests, and a command cheat sheet.
 ##  Networking & Remote Access 
 - [08 Network Topology](08_Network_Topology.md) - Double NAT layout, addressing, and planned VLAN segmentation.
 - [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md) - Pi-hole + Unbound recursive DNS for the tailnet and home LAN, DHCP setup, and troubleshooting.

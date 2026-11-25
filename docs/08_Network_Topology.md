@@ -11,14 +11,14 @@ The homelab currently sits on a flat home network behind **double NAT**. This pa
     |
  ISP router (NAT #1)
     |
- Home router (NAT #2) ---- household devices (Wi-Fi / Ethernet)
+ Home router (NAT #2) ---- other devices (Wi-Fi / Ethernet)
     |
  Powerline adapters
     |
  Homelab server (1x Realtek gigabit NIC)
 ```
 
-**Double NAT** means traffic leaves the house through two routers, each translating addresses. Consequences:
+**Double NAT** means traffic leaves the network through two routers, each translating addresses. Consequences:
 
 *   **Port forwarding would need to be configured on both routers**, and is fragile. It is not used at all.
 *   **Inbound connections from the internet don't reach the server by default**, which is a security benefit.

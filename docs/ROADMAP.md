@@ -7,7 +7,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Docs pipeline:** GitHub deploy key on the homelab, Claude edits and pushes docs on request, secret scanning before every commit
 - [ ] **Daily GitHub activity:** one real, small piece of work each day (log entry, script, doc, fix). No fake commit generators
 - [x] **Folder cleanup:** scripts/logs/archive layout, leftovers quarantined (configs under git -> see Infrastructure as Code)
-- [~] **Remove the double NAT:** *investigated 2026-11-17, kept on purpose for now.* The ISP modem also serves the rest of the house, so bypassing it or turning my router into an access point would make things worse for everyone, and today the double NAT costs nothing (no port forwards needed, Tailscale reports an "easy" NAT). The real fix comes with **wired backhaul**: a single Cat6 run to my office. Step one simply replaces the powerline link (faster and more stable, nothing else changes). Later the upgrade puts one router I control at the edge, the ISP modem becomes a Wi-Fi access point, and VLANs keep the lab separate from the family network
+- [~] **Remove the double NAT:** *investigated 2026-11-17, kept on purpose for now.* The ISP modem also serves other people on the network, so bypassing it or turning my router into an access point would make things worse for everyone, and today the double NAT costs nothing (no port forwards needed, Tailscale reports an "easy" NAT). The real fix comes with **wired backhaul**: a single Cat6 run to my office. Step one simply replaces the powerline link (faster and more stable, nothing else changes). Later the upgrade puts one router I control at the edge, the ISP modem becomes a Wi-Fi access point, and VLANs keep the lab separate from the family network
 - [ ] **Portfolio:** architecture diagram + certification map (see Career & portfolio below)
 - [x] **Minecraft idle auto-stop:** Crafty API (not RCON) checks players every 5 min, stops after 20 min empty, restarts only if running; start on demand from Crafty
 
@@ -16,16 +16,14 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Small-business security check:** an external security check for small businesses (open services, TLS, email spoofing protection, DNS and website hygiene) with a plain-English report and fix list. Scripts produce the findings, a local model only words them. Scans run from a separate cloud box, only against targets the owner has authorised in writing
 
 ## Next (quick networking wins)
-- [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the house later, maybe)
+- [x] **Pi-hole + Unbound:** own recursive DNS on the tailnet and my home router (rest of the home network later, maybe)
 - [~] **Monitoring:** Uptime Kuma *(done 2026-11-16: 12 monitors, ntfy alerts, see [15 Monitoring Uptime Kuma](15_Monitoring_Uptime_Kuma.md))*, then Prometheus + Grafana (SNMP)
 - [x] **LLM janitor:** scripts collect health data, local model words and triages, alerts go to my phone. No sudo, defended against prompt injection from logs; the model never decides severity or acts. *Done 2026-11-14, all 7 steps: hourly checks, validated daily digest, ntfy alerts, config drift, log triage, GPU job queue, graded fault-injection suite (25/25). See [05 LLM Janitor](05_LLM_Janitor.md)*
 - [ ] **Threat-intel scout:** local LLM reads security feeds (ACSC, CVEs) and keeps only what affects this stack. Internet access only, no system data
-- [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only; also the media auto-sort fallback: when the name parser isn't confident, proposes show/movie + folder for my approval (torrent names treated as untrusted input; proposes only, never moves files itself)
+- [ ] **Librarian:** "ask my docs" Q&A over this repo (Open WebUI knowledge base), read-only
 - [x] **Website hardening:** TLS check (1.2/1.3 only, `.dev` HSTS-preloaded), CSP + referrer policy as meta tags (GitHub Pages can't send headers), inline scripts moved out. Clickjacking protection would need a proxy such as Cloudflare
 - [x] **GitHub Action secret scan:** gitleaks on every push, covering edits made on github.com (private rules via a repo secret)
 - [ ] **Self-hosted Obsidian sync + backup:** Self-hosted LiveSync plugin + CouchDB on the homelab over Tailscale (works on iPhone, end-to-end encrypted), replacing the paid Obsidian Sync; vault versioned and included in backups (the AI vault is already versioned, backed up and Syncthing-synced; this item is for the personal vault)
-- [x] **Media auto-sort:** host-side cron instead of a qBittorrent hook; strict own parser instead of guessit; hard links into tvshows/ or movies/; unsure -> left alone + phone push; Jellyfin real-time monitor instead of an API rescan. Torrent names treated as untrusted input (no shell, no ../ paths). See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md#media-auto-sort)
-- [x] **File sharing with friends:** qBittorrent behind a gluetun VPN kill switch (port forwarding still to solve)
 
 ## Networking projects (committed)
 - [ ] **Packet capture series:** Wireshark write-ups of my own services: DNS recursion hop by hop, Tailscale/WireGuard handshake, VPN tunnel, Minecraft protocol
@@ -44,7 +42,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [ ] **Infrastructure as Code:** Ansible playbooks that rebuild the homelab config, kept in a private git repo
 
 ## Career & portfolio
-- [x] **Projects page:** short case studies (problem -> what I did -> result) linking to the blog and docs. *Done 2026-11-14: six case studies (janitor, zero-exposure hosting, DNS, hardening + GPU incident, secrets, VPN kill switch)*
+- [x] **Projects page:** short case studies (problem -> what I did -> result) linking to the blog and docs. *Done 2026-11-14: five case studies (janitor, zero-exposure hosting, DNS, hardening + GPU incident, secrets)*
 - [ ] **Architecture diagram:** one clear diagram of the whole lab (network, services, trust boundaries) on the site
 - [ ] **Certification map:** tag roadmap items with the CCNA / Security+ objectives they cover
 

@@ -139,13 +139,13 @@ cmd="docker compose $(printf '%q ' "$@")"     # quote every argument safely
 exec "$HOME/.local/bin/sops" exec-env secrets.enc.env "$cmd"
 ```
 ```bash
-compose-secrets ~/docker/qbittorrent up -d     # start / recreate
-sops ~/docker/qbittorrent/secrets.enc.env      # edit (decrypts in an editor, re-encrypts on save)
+compose-secrets ~/docker/<stack> up -d         # start / recreate
+sops ~/docker/<stack>/secrets.enc.env          # edit (decrypts in an editor, re-encrypts on save)
 ```
 
 **6. Migration & Verification:**
 *   Each secret was checked after encryption by comparing its **length** or a **hash prefix** against the running container, never the value itself.
-*   Containers were recreated through the helper and re-tested (VPN IP, kill switch, tunnel connected).
+*   Containers were recreated through the helper and re-tested.
 *   All plain-text copies were removed with `shred`: the live `.env` files, old `.env.bak` copies, and **15 daily config snapshots** on the backup disk. A final search for one of the keys across the home folder and backup disk found no plain-text copies.
 
 **Limits (honest threat model):**

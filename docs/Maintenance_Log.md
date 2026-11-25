@@ -15,15 +15,13 @@ Running notes on updates, fixes, and changes. Newest first.
 ### 2026-11-17
 *   **Lynis 70 -> 74:** fixed two hardening sysctls that had silently reverted at boot (ufw's own sysctl file, apport). The drift check now compares running sysctl values with the configured ones, not just with the baseline. Follow-up round: auditd with 24 rules, debsums (0 changed files), libpam-tmpdir, apt-listchanges and apt-show-versions, fail2ban `jail.local`, `UMASK 027`, six leftover kernel configs purged. See [10 Host Hardening](10_Host_Hardening.md#lynis-follow-up-nov-2026).
 *   **Lynis 74 -> 78:** rkhunter (5 first-scan false positives handled), weekly debsums and rkhunter scans read by the janitor, process accounting, pwquality, USB storage blocked, legal banner, three documented sysctl exceptions. Skipped compiler restriction and SSH limits on purpose.
-*   **Double NAT investigated, kept for now:** nbn FTTP, no CGNAT, easy NAT for Tailscale. The ISP modem also serves the rest of the house, so removing the double NAT waits for two Cat6 runs to the office (quotes requested). See [ROADMAP](ROADMAP.md).
+*   **Double NAT investigated, kept for now:** nbn FTTP, no CGNAT, easy NAT for Tailscale. The ISP modem also serves other people on the network, so removing the double NAT waits for two Cat6 runs to the office (quotes requested). See [ROADMAP](ROADMAP.md).
 
 ### 2026-11-16
 *   **Minecraft idle auto-stop:** cron script on the Crafty API stops the server after 20 minutes empty (ntfy push), and replaces Crafty's 12h restart with "restart only if running". API key limited to Commands + Schedule via a Crafty role. See [07 Minecraft Game Server](07_Minecraft_Game_Server.md).
-*   **gluetun control server:** API-key auth on every route (key in sops); janitor VPN check updated to send it from inside the container. Fixes a "route unprotected" warning from log triage. See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md).
 *   **Investigated:** systemd-resolved switching UDP/TCP for one public resolver about 190 times an hour for ten hours; DNS kept working (one failed snap refresh). Watching; recheck after the double-NAT removal.
 
 *   **New service: Uptime Kuma.** 12 monitors (web UIs, health endpoints, three DNS resolvers, website + certificate), alerts to ntfy with its own token; tailnet only. See [15 Monitoring Uptime Kuma](15_Monitoring_Uptime_Kuma.md).
-*   **Media auto-sort:** host-side cron hard-links finished downloads into tvshows/movies; unsure names are left alone with a push. See [12 File Sharing](12_File_Sharing_qBittorrent_and_VPN.md#media-auto-sort).
 *   **Website hardening:** TLS reviewed; CSP + referrer policy meta tags, inline scripts moved to `site.js`, `rel="noopener"` on external links.
 *   **GitHub Action secret scan:** gitleaks on every push incl. github.com edits, pinned and checksum-verified. See [10 Host Hardening](10_Host_Hardening.md).
 
@@ -32,7 +30,7 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ### 2026-11-14
 *   **AI memory:** handover split into an Obsidian vault of 43 linked notes (index, services, devices, decisions, incidents, sessions); checked with fact, inventory, link and secret passes. Then versioned with git and synced to the desktop with Syncthing (tailnet only, no relays/discovery). See [14 AI Second Brain Obsidian Vault](14_AI_Second_Brain_Obsidian_Vault.md).
-*   **LLM janitor step 1:** 22 hourly health checks (disks, SMART, temps, RAM, containers, backups, updates, VPN leak, fail2ban); root checks via a root-owned copy + cron. Baseline 21 ok, 1 warn (pending updates).
+*   **LLM janitor step 1:** 22 hourly health checks (disks, SMART, temps, RAM, containers, backups, updates, fail2ban); root checks via a root-owned copy + cron. Baseline 21 ok, 1 warn (pending updates).
 *   **Jellyfin:** opened to the LG TV only (ufw), shows added via hard links.
 *   **New service:** Pi-hole + Unbound. DNS for all Tailscale devices, then the home router (DHCP reservation + DHCP DNS). Devices named under `.home.arpa`. See [13 DNS Pihole and Unbound](13_DNS_Pihole_and_Unbound.md).
 *   **Fixed:** Tailscale masquerading hid client IPs (`--snat-subnet-routes=false`); router handed out itself as secondary DNS; desktop had static Google DNS.
@@ -54,7 +52,6 @@ Running notes on updates, fixes, and changes. Newest first.
 
 ### 2026-11-12
 *   **Security:** All service `.env` files replaced with sops + age encrypted secrets; plain-text copies (including 15 backup snapshots) shredded. See [10 Host Hardening](10_Host_Hardening.md).
-*   **New service:** qBittorrent behind gluetun (PureVPN, OpenVPN/TCP). Kill switch tested. See [12 File Sharing qBittorrent and VPN](12_File_Sharing_qBittorrent_and_VPN.md).
 *   **Cleanup:** Mod undo backups deleted after a friend tested the mods. Host scripts moved to `~/homelab/scripts/`, logs to `~/homelab/logs/`, old compose files into per-app `archive/` folders. ~11GB of migration and update leftovers moved (checksum-verified) to a quarantine folder on the HDD, to be purged after two weeks.
 *   **Security:** gitleaks pre-commit hook added to the docs repo. See [10 Host Hardening](10_Host_Hardening.md).
 *   **Fixed:** Jellyfin and Ollama failed to start after reboot (`failed to add device rules`). Root cause: `bpf_jit_harden = 2` breaks the NVIDIA toolkit's legacy GPU mode. Switched both to CDI mode; hardening unchanged. See [03 Media Server Jellyfin](03_Media_Server_Jellyfin.md).

@@ -21,7 +21,7 @@ Jellyfin's data is split across both drives, following the storage strategy in [
 
 Keeping the database and cache on the SSD keeps the interface responsive, while the large media files live on the cheaper bulk drive.
 
-New downloads are hard-linked into `movies/` and `tvshows/` automatically, and real-time monitoring is on for both libraries so they appear without a manual scan. See [12 File Sharing: Media Auto-Sort](12_File_Sharing_qBittorrent_and_VPN.md#media-auto-sort).
+Real-time monitoring is on for both libraries, so new files appear without a manual scan.
 
 ---
 
