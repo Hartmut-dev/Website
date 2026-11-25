@@ -42,8 +42,8 @@
 
             <h3>Now</h3>
             <ul>
-                <li><strong>Wired backhaul:</strong> two Cat6 runs to my office (quotes requested). They replace the powerline link and make it possible to remove the double NAT properly.</li>
-                <li><strong>Portfolio:</strong> one architecture diagram of the whole lab (network, services, trust boundaries) and a map of which projects cover which CCNA / Security+ objectives.</li>
+                <li><strong>Pervigil:</strong> open-sourcing the LLM janitor as an installable tool anyone can use: <a href="https://github.com/pervigil-hq/pervigil">github.com/pervigil-hq/pervigil</a>.</li>
+                <li><strong>Wired backhaul:</strong> one Cat6 run to my office. First it simply replaces the powerline link; later it enables a single router at the edge.</li>
                 <li><strong>Daily GitHub activity:</strong> one real, small piece of work each day.</li>
             </ul>
 
@@ -77,6 +77,11 @@
             <p>Welcome to my development log for my personal home lab. I created this space to document my technical journey, troubleshooting steps, and configurations as I build this environment from bare metal up.</p>
             
             <h2>Update Logs</h2>
+            <div class="log-entry">
+                <span class="log-date">November 25, 2026</span>
+                <p><strong>Pervigil, Day One:</strong> The LLM janitor is becoming a real open-source project called <a href="https://github.com/pervigil-hq/pervigil">Pervigil</a> (Latin for "keeping watch all night through"): a morning report for self-hosted servers with health checks, config-drift detection and optional local-AI narration that can't lie to you. This time it's a clean rewrite meant to be read: standard library only, small functions, comments that explain why. Day one set up the whole workflow. The repo lives in its own organisation with least-privilege access: a deploy key that can only push to that one repo, and a token that can manage pull requests but can't write code. Every change goes through a pull request, CI runs ruff, tests on Python 3.11 to 3.14 and a gitleaks scan, and branch protection makes those checks required, so nothing reaches main unless it passes and I've merged it myself. Two decision records explain the core choices: the model never decides severity, and no runtime dependencies. Then the first real code: a shared result type, config loading that rejects typos, a disk check, and a memory check that I wrote myself against tests prepared in advance. The best moment was in review: I had treated "zero memory available" as a read error, which would have hidden the most critical case of all behind "unknown".</p>
+                <p><strong>Housekeeping:</strong> a new kernel and pending updates, then a reboot, after first checking that the NVIDIA module was already built for the new kernel. The janitor's drift warning turned out to be my own Unbound rebuild from last week that I'd never re-approved: lesson learned, re-approve right after a planned change. The cabling plan shrank to a single Cat6 run.</p>
+            </div>
             <div class="log-entry">
                 <span class="log-date">November 19, 2026</span>
                 <p><strong>The 1.8-Second Stall:</strong> Browsing on my desktop felt laggy: pages would hang for a moment, then load all at once. I ruled things out one at a time. The server was idle, no container was using the bandwidth, there was no packet loss and the LAN hop was under a millisecond. DNS was different. Popular sites took 200 to 1,860 ms to resolve through my Pi-hole, against 20 to 60 ms through a public resolver, and Pi-hole&#39;s query log showed 173 of the desktop&#39;s 10,000 lookups that day took over a second. The slowest ones all stopped at almost exactly <strong>1.8 seconds</strong>, which was the clue. Since version 1.22, <strong>Unbound</strong> waits up to 1,800 ms for a fresh answer before falling back to an expired cached one. One fix in the config file: serve the stale answer at once and refresh it in the background. I also raised the cache sizes while I was there. A page pulls from dozens of domains, so a single stalled lookup holds up the whole page.</p>

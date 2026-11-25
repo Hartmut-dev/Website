@@ -12,7 +12,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] **Minecraft idle auto-stop:** Crafty API (not RCON) checks players every 5 min, stops after 20 min empty, restarts only if running; start on demand from Crafty
 
 ## Building something real (started 2026-11-25)
-- [ ] **Open-source the LLM janitor:** turn the homelab janitor into a tool anyone can install: one config file, auto-discovered containers, optional checks (GPU, VPN, backups, SMART), LLM optional, install script, tests in CI, tested on fresh Ubuntu/Debian VMs, then a launch write-up
+- [~] **Open-source the LLM janitor ([Pervigil](https://github.com/pervigil-hq/pervigil)):** *started 2026-11-25: repo, CI and branch protection, disk + memory checks.* Turn the homelab janitor into a tool anyone can install: one config file, auto-discovered containers, optional checks (GPU, VPN, backups, SMART), LLM optional, install script, tests in CI, tested on fresh Ubuntu/Debian VMs, then a launch write-up
 - [ ] **Small-business security check:** an external security check for small businesses (open services, TLS, email spoofing protection, DNS and website hygiene) with a plain-English report and fix list. Scripts produce the findings, a local model only words them. Scans run from a separate cloud box, only against targets the owner has authorised in writing
 
 ## Next (quick networking wins)
